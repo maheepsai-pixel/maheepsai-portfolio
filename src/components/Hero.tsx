@@ -180,18 +180,18 @@ export default function Hero() {
       >
         <div
           style={{
-            width: 32,
-            height: 50,
+            width: 24,
+            height: 40,
             border: "1.5px solid var(--border)",
-            borderRadius: 16,
+            borderRadius: 2,
             display: "flex",
             justifyContent: "center",
             paddingTop: 8,
           }}
         >
           <motion.div
-            style={{ width: 4, height: 8, background: "var(--black)", borderRadius: 2 }}
-            animate={{ y: [0, 8, 0] }}
+            style={{ width: 3, height: 6, background: "var(--black)", borderRadius: 1 }}
+            animate={{ y: [0, 7, 0] }}
             transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
           />
         </div>

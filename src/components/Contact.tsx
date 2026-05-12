@@ -116,16 +116,18 @@ export default function Contact() {
                   <div className="flex items-center gap-4">
                     <div
                       style={{
-                        width: 40,
-                        height: 40,
-                        borderRadius: 8,
+                        width: 36,
+                        height: 36,
+                        borderRadius: 0,
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        background: "rgba(255,255,255,0.06)",
-                        border: "1px solid rgba(255,255,255,0.1)",
-                        color: "rgba(255,255,255,0.5)",
+                        background: "transparent",
+                        border: "none",
+                        borderLeft: "2px solid rgba(255,255,255,0.12)",
+                        color: "rgba(255,255,255,0.4)",
                         flexShrink: 0,
+                        paddingLeft: 10,
                       }}
                     >
                       {item.icon}

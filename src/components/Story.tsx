@@ -105,22 +105,9 @@ export default function Story() {
               animate={inView ? { opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <div
-                style={{
-                  display: "inline-block",
-                  padding: "5px 14px",
-                  background: TERRA_DIM,
-                  border: `1px solid ${TERRA_BORDER}`,
-                  borderRadius: 100,
-                  fontSize: 11,
-                  fontWeight: 600,
-                  color: TERRA,
-                  letterSpacing: "0.03em",
-                  marginBottom: 16,
-                }}
-              >
+              <p style={{ fontSize: 13, fontWeight: 700, color: TERRA, letterSpacing: "0.01em", marginBottom: 8 }}>
                 New Product Manager
-              </div>
+              </p>
               <p style={{ fontSize: 12, color: "rgba(255,255,255,0.3)", letterSpacing: "0.05em" }}>
                 2024 – Present · Full-time
               </p>
@@ -227,19 +214,12 @@ export default function Story() {
               Tools & Methods
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-              {stack.map((s) => (
+              {stack.map((s, i) => (
                 <span
                   key={s}
-                  style={{
-                    padding: "4px 12px",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    borderRadius: 100,
-                    fontSize: 11,
-                    fontWeight: 500,
-                    color: "rgba(255,255,255,0.5)",
-                  }}
+                  style={{ fontSize: 12, fontWeight: 500, color: "rgba(255,255,255,0.38)" }}
                 >
-                  {s}
+                  {s}{i < stack.length - 1 ? <span style={{ margin: "0 6px", opacity: 0.3 }}>·</span> : null}
                 </span>
               ))}
             </div>

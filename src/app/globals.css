@@ -94,7 +94,7 @@ body {
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.02em;
-  border-radius: 4px;
+  border-radius: 2px;
   text-decoration: none;
   transition: background 0.25s ease, transform 0.25s ease;
   border: 1.5px solid var(--black);
@@ -116,7 +116,7 @@ body {
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.02em;
-  border-radius: 4px;
+  border-radius: 2px;
   text-decoration: none;
   transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
   border: 1.5px solid var(--border);
@@ -235,25 +235,21 @@ body {
   color: var(--white);
 }
 
-/* Skill pill */
+/* Skill tag — plain text, no bubble */
 .pill {
   display: inline-flex;
   align-items: center;
-  padding: 6px 14px;
-  border: 1px solid var(--border);
-  border-radius: 100px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
-  color: var(--charcoal);
-  background: var(--white);
-  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  color: var(--gray);
+  background: transparent;
+  border: none;
+  padding: 0;
+  transition: color 0.2s;
 }
 
 .pill:hover {
-  background: var(--black);
-  color: var(--white);
-  border-color: var(--black);
-  transform: translateY(-2px);
+  color: var(--black);
 }
 
 /* Number highlight */

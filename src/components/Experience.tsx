@@ -169,21 +169,19 @@ export default function Experience() {
                 <p style={{ fontSize: 14, color: "var(--gray)", lineHeight: 1.65, marginBottom: 20 }}>
                   {j.tagline}
                 </p>
-                <div
+                <p
                   style={{
-                    padding: "12px 16px",
-                    background: "var(--white)",
-                    border: "1px solid var(--border)",
-                    borderRadius: 8,
                     fontSize: 13,
                     color: "var(--charcoal)",
+                    fontWeight: 600,
                     lineHeight: 1.6,
-                    fontWeight: 500,
                     marginBottom: 24,
+                    borderLeft: "2px solid var(--border)",
+                    paddingLeft: 12,
                   }}
                 >
                   {j.impact}
-                </div>
+                </p>
                 <div className="flex flex-wrap gap-1.5">
                   {j.stack.map((t) => (
                     <span key={t} className="pill" style={{ fontSize: 11, padding: "3px 10px" }}>

@@ -116,10 +116,6 @@ export default function Education() {
           <div style={{ display: "flex", alignItems: "flex-start", gap: 20 }}>
             <span
               style={{
-                padding: "6px 16px",
-                borderRadius: 100,
-                background: "rgba(255,255,255,0.07)",
-                border: "1px solid rgba(255,255,255,0.12)",
                 fontSize: 13,
                 fontWeight: 700,
                 color: "#FFFFFF",

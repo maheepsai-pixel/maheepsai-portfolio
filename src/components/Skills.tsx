@@ -114,19 +114,11 @@ function SkillGrid() {
             <p style={{ fontSize: 13, color: g.fgDim, lineHeight: 1.6 }}>{g.desc}</p>
           </div>
 
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+          <div style={{ display: "flex", flexWrap: "wrap", columnGap: 14, rowGap: 6 }}>
             {g.skills.map((s) => (
               <span
                 key={s}
-                style={{
-                  padding: "3px 10px",
-                  borderRadius: 100,
-                  fontSize: 11,
-                  fontWeight: 500,
-                  background: g.pillBg,
-                  color: g.pillFg,
-                  border: `1px solid ${g.pillBorder}`,
-                }}
+                style={{ fontSize: 12, fontWeight: 500, color: g.fgDim }}
               >
                 {s}
               </span>
