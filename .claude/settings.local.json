@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --yes)",
+      "Bash(npm --version)",
+      "Bash(export PATH=\"/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:$PATH\")",
+      "Bash(find /usr/local /opt/homebrew /usr/bin -name \"node\" 2>/dev/null | head -5; ls /usr/local/bin/ 2>/dev/null | head -20; ls /opt/homebrew/bin/ 2>/dev/null | grep -E \"node|npm\" | head -10)",
+      "Read(//Users/mahee/.nvm/versions/**)",
+      "Read(//Users/mahee/.volta/**)",
+      "Read(//Users/mahee/**)",
+      "Bash(/Users/mahee/Library/Caches/ms-playwright-go/1.50.1/node --version)",
+      "Bash(ls /opt/homebrew/opt/ | grep node 2>/dev/null; ls /usr/local/lib/ 2>/dev/null | grep node)",
+      "Bash(brew install *)",
+      "Bash(export PATH=\"/opt/homebrew/bin:$PATH\")",
+      "Bash(npx --version)"
+    ]
+  }
+}
