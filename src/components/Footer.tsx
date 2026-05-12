@@ -11,9 +11,8 @@ export default function Footer() {
     ],
     Connect: [
       { label: "LinkedIn", href: "https://www.linkedin.com/in/maheep-j-1b3406185/" },
-      { label: "Email", href: "mailto:maheepsaij@gmail.com" },
+      { label: "Email", href: "mailto:maheepsai@gmail.com" },
       { label: "GitHub", href: "https://github.com/maheepsai-pixel" },
-      { label: "513-954-3525", href: "tel:+15139543525" },
     ],
     Companies: [
       { label: "Intel", href: "https://www.intel.com" },

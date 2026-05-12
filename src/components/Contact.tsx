@@ -15,7 +15,7 @@ export default function Contact() {
     const body = encodeURIComponent(
       `Hi Maheepsai,\n\nFrom: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company}\n\n${form.message}`
     );
-    window.open(`mailto:maheepsaij@gmail.com?subject=${encodeURIComponent("Portfolio Inquiry")}&body=${body}`, "_blank");
+    window.open(`mailto:maheepsai@gmail.com?subject=${encodeURIComponent("Portfolio Inquiry")}&body=${body}`, "_blank");
   };
 
   return (
@@ -71,8 +71,8 @@ export default function Contact() {
               {[
                 {
                   label: "Email",
-                  value: "maheepsaij@gmail.com",
-                  href: "mailto:maheepsaij@gmail.com",
+                  value: "maheepsai@gmail.com",
+                  href: "mailto:maheepsai@gmail.com",
                   icon: (
                     <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -87,16 +87,6 @@ export default function Contact() {
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
                       <circle cx="4" cy="4" r="2" />
-                    </svg>
-                  ),
-                },
-                {
-                  label: "Phone",
-                  value: "513-954-3525",
-                  href: "tel:+15139543525",
-                  icon: (
-                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
                   ),
                 },
