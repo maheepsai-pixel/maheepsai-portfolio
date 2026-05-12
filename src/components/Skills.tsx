@@ -5,69 +5,131 @@ import { motion, useInView } from "framer-motion";
 
 const EASE = [0.33, 1, 0.68, 1] as const;
 
+const NAVY = "#0c0d18";
+const CREAM = "#F0ECE4";
+
 const groups = [
   {
     title: "Data & Analytics",
     desc: "Turning raw data into executive-ready insights",
     skills: ["SQL", "Python", "Tableau", "Power BI", "Amazon Redshift", "SPOTFIRE", "Matplotlib", "Pandas"],
+    bg: NAVY,
+    fg: "#FFFFFF",
+    fgDim: "rgba(255,255,255,0.38)",
+    border: "rgba(255,255,255,0.07)",
+    pillBg: "rgba(255,255,255,0.08)",
+    pillFg: "rgba(255,255,255,0.65)",
+    pillBorder: "rgba(255,255,255,0.12)",
   },
   {
     title: "Statistical Engineering",
     desc: "Rigorous methods for complex manufacturing processes",
     skills: ["JMP", "STATISTICA", "DOE", "ANOVA", "SPC", "Control Charts", "6-Sigma"],
+    bg: CREAM,
+    fg: "#0D0D0D",
+    fgDim: "rgba(0,0,0,0.45)",
+    border: "rgba(0,0,0,0.08)",
+    pillBg: "rgba(0,0,0,0.05)",
+    pillFg: "rgba(0,0,0,0.65)",
+    pillBorder: "rgba(0,0,0,0.12)",
   },
   {
     title: "Product Leadership",
     desc: "End-to-end ownership from NPI to high-volume production",
     skills: ["Agile / Scrum", "Jira", "PLM", "Waterfall", "8D Analysis", "FM Analysis", "Root Cause Analysis"],
+    bg: NAVY,
+    fg: "#FFFFFF",
+    fgDim: "rgba(255,255,255,0.38)",
+    border: "rgba(255,255,255,0.07)",
+    pillBg: "rgba(255,255,255,0.08)",
+    pillFg: "rgba(255,255,255,0.65)",
+    pillBorder: "rgba(255,255,255,0.12)",
   },
   {
     title: "Engineering Systems",
     desc: "Building the infrastructure that makes operations hum",
     skills: ["ETL Pipelines", "NPI Management", "KPI Dashboards", "Vendor Management", "Predictive Maintenance", "REST API"],
+    bg: CREAM,
+    fg: "#0D0D0D",
+    fgDim: "rgba(0,0,0,0.45)",
+    border: "rgba(0,0,0,0.08)",
+    pillBg: "rgba(0,0,0,0.05)",
+    pillFg: "rgba(0,0,0,0.65)",
+    pillBorder: "rgba(0,0,0,0.12)",
   },
 ];
 
 function SkillGrid() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
+
   return (
-    <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0">
+    <div
+      ref={ref}
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(4, 1fr)",
+        width: "100%",
+      }}
+    >
       {groups.map((g, i) => (
         <motion.div
           key={g.title}
-          initial={{ opacity: 0, y: 32 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: EASE, delay: i * 0.1 }}
           style={{
-            padding: "40px 32px",
-            borderRight: i < groups.length - 1 ? "1px solid var(--border)" : "none",
-            borderBottom: "1px solid var(--border)",
-            borderTop: "1px solid var(--border)",
-            borderLeft: i === 0 ? "1px solid var(--border)" : "none",
-            cursor: "default",
+            background: g.bg,
+            padding: "clamp(36px,4vw,56px) clamp(24px,3vw,40px)",
+            display: "flex",
+            flexDirection: "column",
+            gap: 20,
+            borderRight: i < groups.length - 1 ? `1px solid ${g.border}` : "none",
           }}
-          whileHover={{ backgroundColor: "var(--bg)" }}
         >
+          {/* Accent line */}
           <div
             style={{
-              width: 32,
+              width: 28,
               height: 2,
-              background: "var(--black)",
-              marginBottom: 20,
+              background: g.fg,
+              opacity: 0.35,
               borderRadius: 1,
+              flexShrink: 0,
             }}
           />
-          <h3
-            className="font-bold mb-2"
-            style={{ fontSize: 17, color: "var(--black)", letterSpacing: "-0.01em" }}
-          >
-            {g.title}
-          </h3>
-          <p style={{ fontSize: 13, color: "var(--gray)", lineHeight: 1.6, marginBottom: 20 }}>{g.desc}</p>
-          <div className="flex flex-wrap gap-1.5">
+
+          <div>
+            <h3
+              style={{
+                fontSize: 16,
+                fontWeight: 700,
+                color: g.fg,
+                letterSpacing: "-0.01em",
+                marginBottom: 8,
+              }}
+            >
+              {g.title}
+            </h3>
+            <p style={{ fontSize: 13, color: g.fgDim, lineHeight: 1.6 }}>{g.desc}</p>
+          </div>
+
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
             {g.skills.map((s) => (
-              <span key={s} className="pill" style={{ fontSize: 11, padding: "3px 10px" }}>{s}</span>
+              <span
+                key={s}
+                style={{
+                  padding: "3px 10px",
+                  borderRadius: 100,
+                  fontSize: 11,
+                  fontWeight: 500,
+                  background: g.pillBg,
+                  color: g.pillFg,
+                  border: `1px solid ${g.pillBorder}`,
+                }}
+              >
+                {s}
+              </span>
             ))}
           </div>
         </motion.div>
@@ -83,7 +145,10 @@ export default function Skills() {
   return (
     <section id="skills" style={{ background: "var(--white)" }} aria-label="Skills">
       <div className="container section">
-        <div ref={titleRef} className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+        <div
+          ref={titleRef}
+          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14"
+        >
           <div>
             <div style={{ overflow: "hidden" }}>
               <motion.p
@@ -115,12 +180,14 @@ export default function Skills() {
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.7, delay: 0.35 }}
           >
-            Built across Intel, Moderna, John Deere, and DRDO — refined by real-world stakes.
+            Built across Intel, Moderna, John Deere, and DRDO — refined by
+            real-world stakes.
           </motion.p>
         </div>
-
-        <SkillGrid />
       </div>
+
+      {/* Full-bleed panel grid — no container padding */}
+      <SkillGrid />
     </section>
   );
 }

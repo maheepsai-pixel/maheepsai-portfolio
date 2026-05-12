@@ -5,203 +5,339 @@ import { motion, useInView } from "framer-motion";
 
 const EASE = [0.33, 1, 0.68, 1] as const;
 
-function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  return (
-    <motion.div
-      ref={ref}
-      className={className}
-      initial={{ opacity: 0, y: 32 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, ease: EASE, delay }}
-    >
-      {children}
-    </motion.div>
-  );
-}
+const NAVY = "#0c0d18";
+const NAVY2 = "#10111f";
+const TERRA = "#c4644a";
+const TERRA_DIM = "rgba(196,100,74,0.15)";
+const TERRA_BORDER = "rgba(196,100,74,0.3)";
 
-function ClipText({ children, delay = 0, className = "" }: {
-  children: React.ReactNode; delay?: number; className?: string;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  return (
-    <div style={{ overflow: "hidden" }} ref={ref}>
-      <motion.div
-        initial={{ y: "110%" }}
-        animate={inView ? { y: 0 } : {}}
-        transition={{ duration: 0.75, ease: EASE, delay }}
-        className={className}
-      >
-        {children}
-      </motion.div>
-    </div>
-  );
-}
-
-const chapters = [
-  {
-    num: "01",
-    title: "The Foundation",
-    location: "Hyderabad, India",
-    period: "2020 – 2021",
-    body: "My engineering journey began at the Defence Research and Development Organisation in India — one of the country's most prestigious research institutions. Here, I learned the fundamentals of precision: how small process improvements compound into massive outcomes. I increased plant production by 10% and cut inventory losses by 21% before I'd even completed my undergraduate degree. India taught me to solve complex problems with limited resources.",
-    highlight: "10% production increase · 21% loss reduction",
-    tags: ["DOE", "SPC", "ANOVA", "KPI Management"],
-  },
-  {
-    num: "02",
-    title: "Crossing Oceans",
-    location: "Cincinnati, Ohio",
-    period: "2021 – 2022",
-    body: "Winning the International Outreach Scholarship at the University of Cincinnati's College of Engineering was a defining moment. I moved across the world with one bag and a clear mission: to become the kind of engineer who bridges data and decision-making. My Master's in Mechanical Engineering gave me the analytical vocabulary I needed — DOE, ANOVA, Six Sigma, statistical process control — to speak the language of manufacturing at scale.",
-    highlight: "International Outreach Scholar · GPA 3.5/4.0",
-    tags: ["Statistical Analysis", "DOE", "Systems Thinking"],
-  },
-  {
-    num: "03",
-    title: "First US Impact",
-    location: "John Deere",
-    period: "2022",
-    body: "My first US role at John Deere put me in the driver's seat of automation. I built a test tool from scratch — pulling live data from web APIs into Python/Pandas pipelines, cleaning and analyzing it against benchmark values — that eliminated manual prototype inspection entirely. Engineers got 60% of their time back. That tool became a predictive maintenance platform. I learned that the best engineering is invisible: it just makes everyone else faster.",
-    highlight: "60% efficiency improvement",
-    tags: ["Python", "Pandas", "REST API", "Data Engineering"],
-  },
-  {
-    num: "04",
-    title: "Research at Scale",
-    location: "Moderna",
-    period: "2023 – 2024",
-    body: "At Moderna, I operated inside a $322M facility transition — moving critical DNA manufacturing processes from Clinical Phase 3 to full commercial production. The stakes were immense. I implemented statistical control charts for every critical process parameter, ran DOE/ANOVA investigations, and built real-time turnaround dashboards in Tableau and Spotfire. This wasn't just engineering; it was enabling the future of medicine. I learned what it means to build processes that can't fail.",
-    highlight: "$322M facility transition enabled",
-    tags: ["Amazon Redshift", "JMP", "STATISTICA", "DOE", "Tableau"],
-  },
-  {
-    num: "05",
-    title: "Engineering at Intel Scale",
-    location: "Intel Corporation",
-    period: "2024 – Present",
-    body: "Intel is where everything converged. Managing a team of module engineers, I now own the end-to-end delivery of 200+ new products — from NPI planning through High Volume Production. I estimated $11M in savings from wafer scrap reduction alone. I write SQL pipelines, build Tableau dashboards, run 8D failure analyses, lead daily Scrum standups, and navigate complex vendor relationships — all in the same week. Engineering, data, and leadership: finally unified.",
-    highlight: "$11M+ savings · 200+ NPI · 99% yield",
-    tags: ["SQL", "Tableau", "ETL", "Agile", "PLM", "8D Analysis"],
-  },
+const metrics = [
+  { value: "$11M+", label: "Cost savings via wafer scrap reduction" },
+  { value: "200+", label: "New products from NPI through HVM" },
+  { value: "99%", label: "Yield achieved NPI to High Volume Production" },
 ];
 
-type Chapter = typeof chapters[0];
-
-function ChapterRow({ ch }: { ch: Chapter }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-  return (
-    <div ref={ref}>
-      <div
-        className="grid md:grid-cols-12 gap-8 md:gap-12 py-12"
-        style={{ borderTop: "1px solid var(--border)" }}
-      >
-        <div className="md:col-span-1">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="section-label"
-            style={{ color: "var(--gray-light)" }}
-          >
-            {ch.num}
-          </motion.div>
-        </div>
-
-        <motion.div
-          className="md:col-span-3"
-          initial={{ opacity: 0, x: -20 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.7, ease: EASE, delay: 0.15 }}
-        >
-          <div className="section-label mb-2" style={{ color: "var(--gray)" }}>
-            {ch.location} · {ch.period}
-          </div>
-          <h3
-            className="font-bold"
-            style={{ fontSize: "clamp(20px, 2.5vw, 28px)", color: "var(--black)", letterSpacing: "-0.02em", lineHeight: 1.2 }}
-          >
-            {ch.title}
-          </h3>
-          <div
-            className="mt-4 px-3 py-2 rounded-lg font-medium"
-            style={{ background: "var(--bg)", border: "1px solid var(--border)", fontSize: 12, color: "var(--charcoal)", lineHeight: 1.5 }}
-          >
-            {ch.highlight}
-          </div>
-        </motion.div>
-
-        <motion.div
-          className="md:col-span-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: EASE, delay: 0.25 }}
-        >
-          <p className="body-lg mb-6" style={{ color: "var(--gray)" }}>{ch.body}</p>
-          <div className="flex flex-wrap gap-2">
-            {ch.tags.map((t) => <span key={t} className="pill">{t}</span>)}
-          </div>
-        </motion.div>
-      </div>
-    </div>
-  );
-}
+const stack = [
+  "SQL", "Tableau", "Python", "ETL", "DOE",
+  "8D Analysis", "Agile", "PLM", "ANOVA", "Root Cause Analysis",
+];
 
 export default function Story() {
-  const titleRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(titleRef, { once: true, margin: "-60px" });
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section id="story" style={{ background: "var(--white)" }} aria-label="My Story">
-      <div className="container section">
-        {/* Section header */}
-        <div ref={titleRef} className="flex items-end justify-between mb-20 flex-wrap gap-6">
+    <section id="story" ref={ref} aria-label="Intel Role">
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "30% 42% 28%",
+          minHeight: "100vh",
+          width: "100%",
+        }}
+        className="flex-none"
+      >
+        {/* Panel 1 — heading */}
+        <motion.div
+          style={{
+            background: NAVY,
+            padding: "clamp(56px,7vw,88px) clamp(32px,4vw,56px)",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            borderRight: "1px solid rgba(255,255,255,0.07)",
+          }}
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.8, ease: EASE }}
+        >
           <div>
-            <div style={{ overflow: "hidden" }}>
-              <motion.p
-                className="section-label"
+            <p
+              style={{
+                fontSize: 10,
+                fontWeight: 600,
+                letterSpacing: "0.16em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.28)",
+                marginBottom: 28,
+              }}
+            >
+              Current Role
+            </p>
+
+            <div style={{ overflow: "hidden", marginBottom: 6 }}>
+              <motion.h2
+                style={{
+                  fontSize: "clamp(48px,6vw,96px)",
+                  fontWeight: 800,
+                  letterSpacing: "-0.05em",
+                  lineHeight: 0.88,
+                  color: "#FFFFFF",
+                }}
                 initial={{ y: "110%" }}
                 animate={inView ? { y: 0 } : {}}
-                transition={{ duration: 0.6, ease: EASE }}
+                transition={{ duration: 0.85, ease: EASE, delay: 0.1 }}
               >
-                The Journey
-              </motion.p>
+                At
+              </motion.h2>
             </div>
             <div style={{ overflow: "hidden" }}>
               <motion.h2
-                className="display-md mt-2"
-                style={{ color: "var(--black)" }}
+                style={{
+                  fontSize: "clamp(48px,6vw,96px)",
+                  fontWeight: 800,
+                  letterSpacing: "-0.05em",
+                  lineHeight: 0.88,
+                  color: TERRA,
+                  fontStyle: "italic",
+                  marginBottom: 32,
+                }}
                 initial={{ y: "110%" }}
                 animate={inView ? { y: 0 } : {}}
-                transition={{ duration: 0.75, ease: EASE, delay: 0.1 }}
+                transition={{ duration: 0.85, ease: EASE, delay: 0.18 }}
               >
-                From Hyderabad
-                <br />
-                to <em style={{ fontStyle: "italic", fontWeight: 800 }}>Intel</em>
+                Intel
               </motion.h2>
             </div>
-          </div>
-          <motion.p
-            className="body-lg max-w-sm"
-            style={{ color: "var(--gray)" }}
-            initial={{ opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, ease: EASE, delay: 0.3 }}
-          >
-            Five chapters. Four companies. One through-line: turning engineering precision into measurable human impact.
-          </motion.p>
-        </div>
 
-        {/* Chapters */}
-        <div className="flex flex-col gap-0">
-          {chapters.map((ch) => (
-            <ChapterRow key={ch.num} ch={ch} />
-          ))}
-        </div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <div
+                style={{
+                  display: "inline-block",
+                  padding: "5px 14px",
+                  background: TERRA_DIM,
+                  border: `1px solid ${TERRA_BORDER}`,
+                  borderRadius: 100,
+                  fontSize: 11,
+                  fontWeight: 600,
+                  color: TERRA,
+                  letterSpacing: "0.03em",
+                  marginBottom: 16,
+                }}
+              >
+                New Product Manager
+              </div>
+              <p style={{ fontSize: 12, color: "rgba(255,255,255,0.3)", letterSpacing: "0.05em" }}>
+                2024 – Present · Full-time
+              </p>
+            </motion.div>
+          </div>
+
+          {/* Location tag at bottom */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            <div style={{ height: 1, background: "rgba(255,255,255,0.07)", marginBottom: 24 }} />
+            <p style={{ fontSize: 12, color: "rgba(255,255,255,0.25)", lineHeight: 1.6 }}>
+              Semiconductor manufacturing · NPI to HVM · Arizona, USA
+            </p>
+          </motion.div>
+        </motion.div>
+
+        {/* Panel 2 — narrative */}
+        <motion.div
+          style={{
+            background: NAVY2,
+            padding: "clamp(56px,7vw,88px) clamp(32px,4vw,56px)",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            borderRight: "1px solid rgba(255,255,255,0.07)",
+          }}
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.85, ease: EASE, delay: 0.2 }}
+        >
+          <div>
+            <p
+              style={{
+                fontSize: 10,
+                fontWeight: 600,
+                letterSpacing: "0.16em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.28)",
+                marginBottom: 28,
+              }}
+            >
+              The Work
+            </p>
+
+            <p
+              style={{
+                fontSize: "clamp(16px,1.7vw,19px)",
+                color: "rgba(255,255,255,0.78)",
+                lineHeight: 1.8,
+                marginBottom: 24,
+              }}
+            >
+              At Intel, everything converged. As New Product Manager, I own the
+              end-to-end delivery of 200+ semiconductor products through the
+              complete NPI lifecycle — from initial planning and cross-functional
+              alignment through High Volume Production.
+            </p>
+            <p
+              style={{
+                fontSize: "clamp(14px,1.5vw,17px)",
+                color: "rgba(255,255,255,0.45)",
+                lineHeight: 1.85,
+                marginBottom: 24,
+              }}
+            >
+              The role demands a rare combination: engineering precision for
+              process analysis, data fluency for SQL pipelines and Tableau
+              dashboards, and leadership for daily Scrum standups and complex
+              vendor negotiations — all in the same week.
+            </p>
+            <p
+              style={{
+                fontSize: "clamp(14px,1.5vw,17px)",
+                color: "rgba(255,255,255,0.45)",
+                lineHeight: 1.85,
+              }}
+            >
+              The headline result: $11M+ in estimated savings from wafer scrap
+              reduction alone — achieved through systematic 8D root cause
+              analysis, DOE experiments, and vendor management programs that
+              eliminated failure modes at semiconductor scale.
+            </p>
+          </div>
+
+          {/* Tools */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.65 }}
+          >
+            <p
+              style={{
+                fontSize: 10,
+                fontWeight: 600,
+                letterSpacing: "0.13em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.25)",
+                marginBottom: 14,
+              }}
+            >
+              Tools & Methods
+            </p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+              {stack.map((s) => (
+                <span
+                  key={s}
+                  style={{
+                    padding: "4px 12px",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    borderRadius: 100,
+                    fontSize: 11,
+                    fontWeight: 500,
+                    color: "rgba(255,255,255,0.5)",
+                  }}
+                >
+                  {s}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        </motion.div>
+
+        {/* Panel 3 — metrics */}
+        <motion.div
+          style={{
+            background: "#0e0a08",
+            padding: "clamp(56px,7vw,88px) clamp(28px,3.5vw,48px)",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.8, ease: EASE, delay: 0.35 }}
+        >
+          <p
+            style={{
+              fontSize: 10,
+              fontWeight: 600,
+              letterSpacing: "0.16em",
+              textTransform: "uppercase",
+              color: "rgba(255,255,255,0.28)",
+            }}
+          >
+            Key Results
+          </p>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
+            {metrics.map((m, i) => (
+              <div
+                key={m.value}
+                style={{
+                  padding: "28px 0",
+                  borderTop: "1px solid rgba(255,255,255,0.07)",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: "clamp(32px,3.5vw,52px)",
+                    fontWeight: 800,
+                    letterSpacing: "-0.04em",
+                    lineHeight: 1,
+                    color: i === 0 ? TERRA : "#FFFFFF",
+                    marginBottom: 8,
+                  }}
+                >
+                  {m.value}
+                </div>
+                <p
+                  style={{
+                    fontSize: 12,
+                    color: "rgba(255,255,255,0.35)",
+                    lineHeight: 1.55,
+                    letterSpacing: "0.01em",
+                  }}
+                >
+                  {m.label}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <motion.a
+            href="#experience"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              fontSize: 12,
+              fontWeight: 600,
+              color: TERRA,
+              textDecoration: "none",
+              borderBottom: `1px solid ${TERRA_BORDER}`,
+              paddingBottom: 4,
+              alignSelf: "flex-start",
+            }}
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.7 }}
+          >
+            Full experience
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </motion.a>
+        </motion.div>
       </div>
+
+      {/* Mobile fallback — stacked panels */}
+      <style>{`
+        @media (max-width: 768px) {
+          #story > div { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </section>
   );
 }
