@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 
 const EASE = [0.33, 1, 0.68, 1] as const;
 
-const NAVY = "#0c0d18";
+const NAVY = "#1a1208";
 const CREAM = "#F0ECE4";
 const TERRA = "#c4644a";
 

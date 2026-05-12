@@ -22,7 +22,9 @@
       "mcp__Claude_Preview__preview_start",
       "mcp__Claude_in_Chrome__tabs_context_mcp",
       "WebFetch(domain:www.flyhyer.com)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(gh api *)",
+      "Bash(python3 -c \"import sys,json; [print\\(r['name'], '-', r.get\\('description',''\\)\\) for r in json.load\\(sys.stdin\\)]\")"
     ]
   }
 }

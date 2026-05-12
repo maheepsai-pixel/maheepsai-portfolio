@@ -118,54 +118,54 @@ export default function Experience() {
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.35, ease: EASE }}
           >
-            <div className="grid md:grid-cols-12 gap-12">
-              {/* Left */}
-              <div className="md:col-span-4">
+            <div className="grid md:grid-cols-12 gap-x-12 gap-y-8">
+              {/* Left — meta */}
+              <div className="md:col-span-5">
+                <div style={{ fontSize: 13, fontWeight: 700, color: j.accent, letterSpacing: "0.02em", marginBottom: 8 }}>
+                  {j.company}
+                </div>
                 <h3
-                  className="font-bold mb-2"
-                  style={{ fontSize: "clamp(20px, 2.5vw, 26px)", color: "var(--black)", letterSpacing: "-0.02em", lineHeight: 1.2 }}
+                  className="font-bold mb-3"
+                  style={{ fontSize: "clamp(22px, 2.4vw, 30px)", color: "var(--black)", letterSpacing: "-0.025em", lineHeight: 1.15 }}
                 >
                   {j.role}
                 </h3>
-                <div style={{ fontSize: 15, fontWeight: 600, color: j.accent, marginBottom: 4 }}>
-                  {j.company}
-                </div>
                 <div className="section-label mb-6">
                   {j.period ? `${j.period} · ${j.type}` : j.type}
                 </div>
-                <p style={{ fontSize: 14, color: "var(--gray)", lineHeight: 1.65, marginBottom: 20 }}>
+                <p style={{ fontSize: 15, color: "var(--gray)", lineHeight: 1.7, marginBottom: 24 }}>
                   {j.tagline}
                 </p>
                 <p
                   style={{
                     fontSize: 13,
-                    color: "var(--charcoal)",
+                    color: "var(--black)",
                     fontWeight: 600,
-                    lineHeight: 1.6,
-                    marginBottom: 24,
-                    borderLeft: "2px solid var(--border)",
-                    paddingLeft: 12,
+                    lineHeight: 1.7,
+                    marginBottom: 28,
+                    borderLeft: `2px solid ${j.accent}`,
+                    paddingLeft: 14,
                   }}
                 >
                   {j.impact}
                 </p>
-                <div className="flex flex-wrap gap-1.5">
+                <div style={{ display: "flex", flexWrap: "wrap", columnGap: 18, rowGap: 8 }}>
                   {j.stack.map((t) => (
-                    <span key={t} className="pill" style={{ fontSize: 11, padding: "3px 10px" }}>
+                    <span key={t} style={{ fontSize: 12, fontWeight: 500, color: "var(--gray)" }}>
                       {t}
                     </span>
                   ))}
                 </div>
               </div>
 
-              {/* Right */}
-              <div className="md:col-span-8">
+              {/* Right — achievements */}
+              <div className="md:col-span-7">
                 <p className="section-label mb-6">Achievements</p>
                 <div className="flex flex-col">
                   {j.highlights.map((h, idx) => (
                     <motion.div
                       key={idx}
-                      className="flex gap-4 py-5"
+                      className="flex gap-5 py-5"
                       style={{
                         borderBottom: idx < j.highlights.length - 1 ? "1px solid var(--border)" : "none",
                       }}
@@ -175,15 +175,18 @@ export default function Experience() {
                     >
                       <div
                         style={{
-                          width: 4,
-                          height: 4,
-                          borderRadius: "50%",
-                          background: "var(--gray-light)",
+                          fontSize: 11,
+                          fontWeight: 600,
+                          color: j.accent,
                           flexShrink: 0,
-                          marginTop: 10,
+                          minWidth: 24,
+                          letterSpacing: "0.05em",
+                          paddingTop: 4,
                         }}
-                      />
-                      <p style={{ fontSize: 15, color: "var(--gray)", lineHeight: 1.7 }}>{h}</p>
+                      >
+                        {String(idx + 1).padStart(2, "0")}
+                      </div>
+                      <p style={{ fontSize: 15, color: "var(--charcoal)", lineHeight: 1.7 }}>{h}</p>
                     </motion.div>
                   ))}
                 </div>
