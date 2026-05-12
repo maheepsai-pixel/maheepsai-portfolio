@@ -7,25 +7,21 @@ const EASE = [0.33, 1, 0.68, 1] as const;
 
 const groups = [
   {
-    icon: "📊",
     title: "Data & Analytics",
     desc: "Turning raw data into executive-ready insights",
     skills: ["SQL", "Python", "Tableau", "Power BI", "Amazon Redshift", "SPOTFIRE", "Matplotlib", "Pandas"],
   },
   {
-    icon: "🔬",
     title: "Statistical Engineering",
     desc: "Rigorous methods for complex manufacturing processes",
     skills: ["JMP", "STATISTICA", "DOE", "ANOVA", "SPC", "Control Charts", "6-Sigma"],
   },
   {
-    icon: "🎯",
     title: "Product Leadership",
     desc: "End-to-end ownership from NPI to high-volume production",
     skills: ["Agile / Scrum", "Jira", "PLM", "Waterfall", "8D Analysis", "FM Analysis", "Root Cause Analysis"],
   },
   {
-    icon: "⚙️",
     title: "Engineering Systems",
     desc: "Building the infrastructure that makes operations hum",
     skills: ["ETL Pipelines", "NPI Management", "KPI Dashboards", "Vendor Management", "Predictive Maintenance", "REST API"],
@@ -49,13 +45,23 @@ function SkillGrid() {
             borderBottom: "1px solid var(--border)",
             borderTop: "1px solid var(--border)",
             borderLeft: i === 0 ? "1px solid var(--border)" : "none",
-            transition: "background 0.3s ease",
             cursor: "default",
           }}
           whileHover={{ backgroundColor: "var(--bg)" }}
         >
-          <div style={{ fontSize: 32, marginBottom: 16 }}>{g.icon}</div>
-          <h3 className="font-bold mb-2" style={{ fontSize: 18, color: "var(--black)", letterSpacing: "-0.01em" }}>
+          <div
+            style={{
+              width: 32,
+              height: 2,
+              background: "var(--black)",
+              marginBottom: 20,
+              borderRadius: 1,
+            }}
+          />
+          <h3
+            className="font-bold mb-2"
+            style={{ fontSize: 17, color: "var(--black)", letterSpacing: "-0.01em" }}
+          >
             {g.title}
           </h3>
           <p style={{ fontSize: 13, color: "var(--gray)", lineHeight: 1.6, marginBottom: 20 }}>{g.desc}</p>
@@ -77,7 +83,6 @@ export default function Skills() {
   return (
     <section id="skills" style={{ background: "var(--white)" }} aria-label="Skills">
       <div className="container section">
-        {/* Header */}
         <div ref={titleRef} className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
           <div>
             <div style={{ overflow: "hidden" }}>
@@ -114,7 +119,6 @@ export default function Skills() {
           </motion.p>
         </div>
 
-        {/* Feature grid — Flyhyer style */}
         <SkillGrid />
       </div>
     </section>
