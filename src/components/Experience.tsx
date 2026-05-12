@@ -1,163 +1,245 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+
+const EASE = [0.33, 1, 0.68, 1] as const;
 
 const jobs = [
   {
     company: "Intel",
     role: "New Product Manager",
     period: "Feb 2024 – Present",
-    location: "On-site",
-    color: "#0071c5",
+    type: "Full-time",
+    bg: "#0071c5",
     logo: "🔷",
+    tagline: "Driving semiconductor NPI excellence at scale",
+    impact: "$11M+ · 200+ Products · 99% Yield",
     highlights: [
-      "Managed a team of module engineers to transfer manufacturing processes, achieving 99% yield transitioning from NPI to High Volume Production",
-      "Estimated $11M in savings on wafer scraps and misprocessing through vendor management and data analysis",
-      "Owned end-to-end delivery of 200+ new products, overseeing continuous yield improvement and cost reduction",
-      "Created Tableau and Matplotlib dashboards to monitor inline projects and drive data-based decisions",
-      "Collaborated with data engineers to implement ETL processes; optimized SQL queries for analytical requirements",
-      "Performed DOE to address root causes for yield issues; used 8D and FM Analysis to eliminate wafer scrap",
-      "Led weekly/daily Scrum meetings; managed Product Life Cycle (PLM) using Agile and Waterfall methodologies",
+      "Managed team of module engineers to transfer manufacturing process, achieving 99% yield from NPI → HVM",
+      "Estimated $11M savings on wafer scraps via vendor management, DOE root cause analysis & 8D/FM Analysis",
+      "Owned end-to-end delivery of 200+ new products with continuous yield improvement and cost reduction",
+      "Built Tableau + Matplotlib dashboards for inline project monitoring; optimized SQL/ETL pipelines",
+      "Led daily Scrum standups; managed full PLM lifecycle using Agile and Waterfall methodologies",
     ],
-    tags: ["Tableau", "SQL", "Python", "DOE", "Agile", "Scrum", "ETL", "Matplotlib", "PLM"],
-    impact: "$11M+ savings · 200+ products · 99% yield",
+    stack: ["Tableau", "SQL", "Python", "DOE", "8D", "Agile", "ETL", "PLM"],
   },
   {
     company: "Moderna",
     role: "Program Manager",
     period: "Feb 2023 – Feb 2024",
-    location: "Hybrid",
-    color: "#c30045",
+    type: "Full-time",
+    bg: "#c30045",
     logo: "🧬",
+    tagline: "Enabling the future of medicine through process scale-up",
+    impact: "$322M Facility · Clinical → Commercial",
     highlights: [
-      "Led transfer of technology-critical upstream DNA processes enabling commercial production transition from Clinical Phase 3 to a new $322M Moderna facility",
-      "Supported MFG investigations and ad hoc data needs through STATISTICA, Amazon Redshift, JMP, and SQL",
-      "Collaborated across departments to conduct DOE/ANOVA process investigations for raw materials approval",
+      "Led transfer of upstream DNA processes enabling transition from Clinical Phase 3 to $322M commercial facility",
+      "Supported MFG investigations via STATISTICA, Amazon Redshift, JMP, and SQL data analysis",
       "Implemented control charts for all critical process parameters (CPPs) using JMP, minimizing deviations",
-      "Developed turnaround dashboards on SPOTFIRE and Tableau for DNA processing analytics",
+      "Conducted DOE/ANOVA investigations for raw material approvals across cross-functional teams",
+      "Developed real-time turnaround dashboards on SPOTFIRE and Tableau for DNA processing analytics",
     ],
-    tags: ["STATISTICA", "Amazon Redshift", "JMP", "SQL", "DOE", "ANOVA", "Tableau", "SPOTFIRE"],
-    impact: "$322M facility transition · Clinical → Commercial",
+    stack: ["Amazon Redshift", "JMP", "STATISTICA", "SQL", "Tableau", "SPOTFIRE", "DOE", "ANOVA"],
   },
   {
     company: "John Deere",
     role: "Systems Engineer",
     period: "May 2022 – Dec 2022",
-    location: "On-site",
-    color: "#367c2b",
+    type: "Full-time",
+    bg: "#367c2b",
     logo: "🚜",
+    tagline: "Automating engineering workflows with data intelligence",
+    impact: "60% Efficiency Improvement",
     highlights: [
-      "Built a test tool that reads source data from web APIs into a Pandas DataFrame, performs cleansing, data analysis, and reports data trends per Benchmark Values",
-      "Improved engineering work efficiency by 60%, eliminating manual inspection of prototype machines",
-      "Built a predictive maintenance platform leveraging data cleaning, wrangling, and visualization frameworks",
-      "Organized cross-functional RCA meetings and provided technical support as a Systems Engineer",
+      "Built a test tool reading web API data into Pandas DataFrames for automated cleansing, analysis, and trend reporting",
+      "Eliminated manual prototype machine inspection — delivered 60% engineering workflow efficiency improvement",
+      "Built predictive maintenance platform using data cleaning, wrangling, and visualization frameworks",
+      "Organized cross-functional Root Cause Analysis meetings and provided systems engineering technical support",
     ],
-    tags: ["Python", "Pandas", "REST API", "Data Analysis", "Predictive Maintenance"],
-    impact: "60% efficiency improvement",
+    stack: ["Python", "Pandas", "REST API", "Data Analysis", "Predictive Maintenance"],
   },
   {
     company: "DRDO",
     role: "Process Intern",
     period: "Jan 2020 – Aug 2021",
-    location: "On-site",
-    color: "#7c3aed",
+    type: "Internship",
+    bg: "#7c3aed",
     logo: "🛡️",
+    tagline: "Defence research engineering in India's premier lab",
+    impact: "10% Output Gain · 21% Loss Reduction",
     highlights: [
-      "Increased plant production by 10% through efficient KPI target setting and corrective actions",
-      "Employed JMP to perform SPC and ANOVA for intricate manufacturing process assessment",
-      "Performed DOE experiments to enable 24/7 disposition",
-      "Optimized inventory management to decrease losses by 21%",
+      "Increased plant production by 10% through targeted KPI setting and systematic corrective actions",
+      "Employed JMP for SPC and ANOVA on intricate manufacturing process assessments",
+      "Performed DOE experiments to enable 24/7 production disposition",
+      "Optimized inventory management systems to decrease operational losses by 21%",
     ],
-    tags: ["JMP", "SPC", "ANOVA", "DOE", "KPI", "Inventory Management"],
-    impact: "10% production increase · 21% loss reduction",
+    stack: ["JMP", "SPC", "ANOVA", "DOE", "KPI Management"],
   },
 ];
 
 export default function Experience() {
-  const [activeJob, setActiveJob] = useState(0);
-  const job = jobs[activeJob];
+  const [active, setActive] = useState(0);
+  const titleRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(titleRef, { once: true, margin: "-60px" });
 
   return (
-    <section id="experience" className="py-24 px-6 max-w-6xl mx-auto" aria-label="Work Experience">
-      <p className="section-label">Work Experience</p>
-      <h2 className="text-3xl md:text-4xl font-bold text-white mb-12">
-        Where I&apos;ve <span className="gradient-text">Made an Impact</span>
-      </h2>
+    <section id="experience" style={{ background: "var(--bg)" }} aria-label="Work Experience">
+      <div className="container section">
+        {/* Header */}
+        <div ref={titleRef} className="mb-14">
+          <div style={{ overflow: "hidden" }}>
+            <motion.p
+              className="section-label"
+              initial={{ y: "110%" }}
+              animate={inView ? { y: 0 } : {}}
+              transition={{ duration: 0.6, ease: EASE }}
+            >
+              Work Experience
+            </motion.p>
+          </div>
+          <div style={{ overflow: "hidden" }}>
+            <motion.h2
+              className="display-md mt-2"
+              style={{ color: "var(--black)" }}
+              initial={{ y: "110%" }}
+              animate={inView ? { y: 0 } : {}}
+              transition={{ duration: 0.75, ease: EASE, delay: 0.1 }}
+            >
+              Where I Made
+              <br />
+              an <em style={{ fontStyle: "italic" }}>Impact</em>
+            </motion.h2>
+          </div>
+        </div>
 
-      <div className="flex flex-col md:flex-row gap-8">
-        {/* Sidebar tabs */}
-        <div className="flex md:flex-col gap-2 overflow-x-auto md:overflow-visible md:min-w-[200px]">
+        {/* Company selector */}
+        <motion.div
+          className="flex flex-wrap gap-2 mb-10"
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: EASE, delay: 0.3 }}
+        >
           {jobs.map((j, i) => (
             <button
               key={j.company}
-              onClick={() => setActiveJob(i)}
-              className={`px-4 py-3 text-left rounded-xl border transition-all whitespace-nowrap md:whitespace-normal ${
-                activeJob === i
-                  ? "bg-[rgba(99,102,241,0.15)] border-[rgba(99,102,241,0.5)] text-white"
-                  : "bg-transparent border-transparent text-[#8888a8] hover:text-white hover:bg-[rgba(99,102,241,0.06)]"
-              }`}
+              onClick={() => setActive(i)}
+              style={{
+                padding: "10px 20px",
+                borderRadius: 8,
+                fontSize: 14,
+                fontWeight: 600,
+                border: `1.5px solid ${active === i ? j.bg : "var(--border)"}`,
+                background: active === i ? `${j.bg}12` : "var(--white)",
+                color: active === i ? j.bg : "var(--gray)",
+                cursor: "pointer",
+                transition: "all 0.25s ease",
+                display: "flex",
+                alignItems: "center",
+                gap: 8,
+              }}
             >
-              <span className="mr-2">{j.logo}</span>
-              <span className="font-medium text-sm">{j.company}</span>
+              <span>{j.logo}</span>
+              {j.company}
             </button>
           ))}
-        </div>
+        </motion.div>
 
-        {/* Job details */}
-        <div className="flex-1 card p-8">
-          <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
-            <div>
-              <h3 className="text-xl font-bold text-white">{job.role}</h3>
-              <div className="flex items-center gap-2 mt-1">
-                <span className="text-lg">{job.logo}</span>
-                <span className="text-[#a5b4fc] font-semibold">{job.company}</span>
-                <span className="text-[#8888a8] text-sm">· {job.location}</span>
-              </div>
-            </div>
-            <div className="text-right">
-              <span
-                className="px-3 py-1 rounded-full text-xs font-medium"
-                style={{
-                  background: `${job.color}20`,
-                  border: `1px solid ${job.color}40`,
-                  color: job.color,
-                }}
-              >
-                {job.period}
-              </span>
-            </div>
-          </div>
-
-          {/* Impact badge */}
-          <div
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium mb-6"
-            style={{ background: "rgba(99,102,241,0.1)", color: "#a5b4fc", border: "1px solid rgba(99,102,241,0.2)" }}
+        {/* Job card */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.5, ease: EASE }}
           >
-            <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-            {job.impact}
-          </div>
+            {(() => {
+              const j = jobs[active];
+              return (
+                <div className="card-white" style={{ overflow: "hidden" }}>
+                  {/* Top accent stripe */}
+                  <div style={{ height: 4, background: j.bg, width: "100%" }} />
 
-          {/* Highlights */}
-          <ul className="space-y-3 mb-8">
-            {job.highlights.map((h, i) => (
-              <li key={i} className="flex gap-3 text-[#8888a8] text-sm leading-relaxed">
-                <div className="timeline-dot mt-1.5" style={{ width: 8, height: 8, minWidth: 8 }} />
-                <span>{h}</span>
-              </li>
-            ))}
-          </ul>
+                  <div className="grid md:grid-cols-12 gap-0">
+                    {/* Left panel */}
+                    <div
+                      className="md:col-span-4 p-8 md:border-r"
+                      style={{ borderColor: "var(--border)" }}
+                    >
+                      <div
+                        className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-6"
+                        style={{ background: `${j.bg}15` }}
+                      >
+                        {j.logo}
+                      </div>
+                      <h3
+                        className="font-bold mb-1"
+                        style={{ fontSize: 24, color: "var(--black)", letterSpacing: "-0.02em" }}
+                      >
+                        {j.role}
+                      </h3>
+                      <div className="font-semibold mb-1" style={{ color: j.bg, fontSize: 15 }}>
+                        {j.company}
+                      </div>
+                      <div className="section-label mb-6">{j.period} · {j.type}</div>
+                      <p style={{ fontSize: 14, color: "var(--gray)", lineHeight: 1.65 }}>
+                        {j.tagline}
+                      </p>
+                      {/* Impact */}
+                      <div
+                        className="mt-6 p-4 rounded-lg"
+                        style={{ background: `${j.bg}10`, border: `1px solid ${j.bg}30` }}
+                      >
+                        <div className="section-label mb-1" style={{ color: j.bg }}>Key Impact</div>
+                        <div style={{ fontSize: 14, color: "var(--charcoal)", fontWeight: 600 }}>{j.impact}</div>
+                      </div>
+                      {/* Stack */}
+                      <div className="mt-6 flex flex-wrap gap-2">
+                        {j.stack.map((t) => (
+                          <span
+                            key={t}
+                            className="pill"
+                            style={{ fontSize: 11, padding: "4px 10px" }}
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
 
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2">
-            {job.tags.map((t) => (
-              <span key={t} className="skill-pill text-xs">
-                {t}
-              </span>
-            ))}
-          </div>
-        </div>
+                    {/* Right panel: highlights */}
+                    <div className="md:col-span-8 p-8">
+                      <p className="section-label mb-6">Achievements</p>
+                      <div className="flex flex-col gap-0">
+                        {j.highlights.map((h, i) => (
+                          <motion.div
+                            key={i}
+                            className="flex gap-4 py-4"
+                            style={{ borderBottom: i < j.highlights.length - 1 ? "1px solid var(--border)" : "none" }}
+                            initial={{ opacity: 0, x: 16 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.45, ease: EASE, delay: i * 0.08 }}
+                          >
+                            <div
+                              className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5"
+                              style={{ background: `${j.bg}15`, minWidth: 20 }}
+                            >
+                              <div
+                                style={{ width: 6, height: 6, borderRadius: "50%", background: j.bg }}
+                              />
+                            </div>
+                            <p style={{ fontSize: 15, color: "var(--gray)", lineHeight: 1.65 }}>{h}</p>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })()}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );

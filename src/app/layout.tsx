@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://maheepsaijinka.dev";
 
@@ -15,27 +19,11 @@ export const metadata: Metadata = {
   description:
     "Maheepsai Jinka — New Product Manager at Intel driving $11M+ savings, 200+ NPI launches, and 99% yield. Expert in Python, SQL, Tableau, Agile, DOE, and data-driven manufacturing. Former Moderna & John Deere engineer.",
   keywords: [
-    "Maheepsai Jinka",
-    "Maheep Jinka",
-    "Product Manager",
-    "New Product Introduction",
-    "NPI",
-    "Intel Product Manager",
-    "Moderna Program Manager",
-    "John Deere Systems Engineer",
-    "Data Analytics",
-    "Python SQL Tableau",
-    "Mechanical Engineering",
-    "University of Cincinnati",
-    "Manufacturing Engineering",
-    "DOE ANOVA",
-    "Amazon Redshift",
-    "Power BI",
-    "Agile Scrum",
-    "Semiconductor",
-    "Yield Improvement",
-    "ETL",
-    "KPI Dashboard",
+    "Maheepsai Jinka", "Maheep Jinka", "Product Manager", "New Product Introduction",
+    "NPI", "Intel Product Manager", "Moderna Program Manager", "John Deere Systems Engineer",
+    "Data Analytics", "Python SQL Tableau", "Mechanical Engineering", "University of Cincinnati",
+    "Manufacturing Engineering", "DOE ANOVA", "Amazon Redshift", "Power BI", "Agile Scrum",
+    "Semiconductor", "Yield Improvement", "ETL", "KPI Dashboard",
   ],
   authors: [{ name: "Maheepsai Jinka", url: BASE_URL }],
   creator: "Maheepsai Jinka",
@@ -46,38 +34,20 @@ export const metadata: Metadata = {
     title: "Maheepsai Jinka | Product Manager & Data Analytics Expert",
     description:
       "Product Manager at Intel with $11M+ cost savings, 200+ NPI launches. Expertise in data analytics, manufacturing engineering, Python, SQL, Tableau.",
-    images: [
-      {
-        url: `${BASE_URL}/og-image.png`,
-        width: 1200,
-        height: 630,
-        alt: "Maheepsai Jinka — Product Manager Portfolio",
-      },
-    ],
+    images: [{ url: `${BASE_URL}/og-image.png`, width: 1200, height: 630, alt: "Maheepsai Jinka Portfolio" }],
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: "Maheepsai Jinka | Product Manager & Data Analytics Expert",
-    description:
-      "Product Manager at Intel with $11M+ cost savings and 200+ NPI launches. Expert in Python, SQL, Tableau, and manufacturing analytics.",
+    description: "Product Manager at Intel with $11M+ cost savings and 200+ NPI launches.",
     images: [`${BASE_URL}/og-image.png`],
   },
   robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
+    index: true, follow: true,
+    googleBot: { index: true, follow: true, "max-video-preview": -1, "max-image-preview": "large", "max-snippet": -1 },
   },
   alternates: { canonical: BASE_URL },
-  verification: {
-    google: process.env.GOOGLE_VERIFICATION || "",
-  },
 };
 
 const structuredData = {
@@ -93,43 +63,16 @@ const structuredData = {
       telephone: "+1-513-954-3525",
       sameAs: ["https://www.linkedin.com/in/maheep-j-1b3406185/"],
       jobTitle: "New Product Manager",
-      worksFor: {
-        "@type": "Organization",
-        name: "Intel Corporation",
-        url: "https://www.intel.com",
-      },
-      alumniOf: {
-        "@type": "CollegeOrUniversity",
-        name: "University of Cincinnati",
-        url: "https://www.uc.edu",
-      },
-      description:
-        "Experienced Product Manager at Intel with expertise in NPI, data analytics, Python, SQL, Tableau, manufacturing engineering, and Agile methodologies. Achieved $11M+ in cost savings and managed 200+ new product introductions.",
-      knowsAbout: [
-        "Product Management",
-        "New Product Introduction",
-        "Data Analytics",
-        "Python",
-        "SQL",
-        "Tableau",
-        "Power BI",
-        "Amazon Redshift",
-        "DOE",
-        "ANOVA",
-        "Agile",
-        "Scrum",
-        "Manufacturing Engineering",
-        "Yield Improvement",
-        "ETL",
-        "Statistical Process Control",
-      ],
+      worksFor: { "@type": "Organization", name: "Intel Corporation", url: "https://www.intel.com" },
+      alumniOf: { "@type": "CollegeOrUniversity", name: "University of Cincinnati", url: "https://www.uc.edu" },
+      description: "Experienced Product Manager at Intel with expertise in NPI, data analytics, Python, SQL, Tableau, manufacturing engineering, and Agile. Achieved $11M+ in cost savings and managed 200+ new product introductions.",
+      knowsAbout: ["Product Management","NPI","Data Analytics","Python","SQL","Tableau","Power BI","Amazon Redshift","DOE","ANOVA","Agile","Scrum","Manufacturing Engineering","Yield Improvement","ETL","SPC"],
     },
     {
       "@type": "WebSite",
       "@id": `${BASE_URL}/#website`,
       url: BASE_URL,
       name: "Maheepsai Jinka Portfolio",
-      description: "Personal portfolio of Maheepsai Jinka, Product Manager and Data Analytics Expert",
       author: { "@id": `${BASE_URL}/#person` },
     },
   ],
@@ -139,12 +82,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={inter.variable}>
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <meta name="theme-color" content="#080810" />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+        <meta name="theme-color" content="#F7F6F2" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className="min-h-screen">{children}</body>

@@ -1,150 +1,202 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
-const roles = [
-  "New Product Manager @ Intel",
-  "Data Analytics Expert",
-  "Manufacturing Engineer",
-  "Program Manager",
-];
+const EASE = [0.33, 1, 0.68, 1] as const;
+
+function ClipReveal({
+  children,
+  delay = 0,
+  className = "",
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}) {
+  return (
+    <div className={`clip-wrap ${className}`}>
+      <motion.div
+        initial={{ y: "110%" }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.9, ease: EASE, delay }}
+      >
+        {children}
+      </motion.div>
+    </div>
+  );
+}
 
 export default function Hero() {
-  const [roleIdx, setRoleIdx] = useState(0);
-  const [displayed, setDisplayed] = useState("");
-  const [typing, setTyping] = useState(true);
-
-  useEffect(() => {
-    const target = roles[roleIdx];
-    if (typing) {
-      if (displayed.length < target.length) {
-        const t = setTimeout(() => setDisplayed(target.slice(0, displayed.length + 1)), 60);
-        return () => clearTimeout(t);
-      } else {
-        const t = setTimeout(() => setTyping(false), 2000);
-        return () => clearTimeout(t);
-      }
-    } else {
-      if (displayed.length > 0) {
-        const t = setTimeout(() => setDisplayed(displayed.slice(0, -1)), 35);
-        return () => clearTimeout(t);
-      } else {
-        setRoleIdx((i) => (i + 1) % roles.length);
-        setTyping(true);
-      }
-    }
-  }, [displayed, typing, roleIdx]);
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  // Subtle fade-only parallax — no y-shift so hero doesn't overlap sections below
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden hero-gradient noise"
+      ref={ref}
+      className="relative flex flex-col justify-between"
+      style={{
+        minHeight: "100svh",
+        background: "var(--bg)",
+        paddingTop: "80px",
+        overflow: "hidden",
+      }}
       aria-label="Hero"
     >
-      {/* Background orbs */}
+      {/* Subtle grid background */}
       <div
-        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl opacity-20 animate-pulse-slow"
-        style={{ background: "radial-gradient(circle, #6366f1, transparent)" }}
-      />
-      <div
-        className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full blur-3xl opacity-15 animate-pulse-slow"
-        style={{ background: "radial-gradient(circle, #38bdf8, transparent)", animationDelay: "1.5s" }}
-      />
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border border-[rgba(99,102,241,0.06)] animate-spin-slow"
-      />
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full border border-[rgba(167,139,250,0.08)] animate-spin-slow"
-        style={{ animationDirection: "reverse", animationDuration: "15s" }}
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px)
+          `,
+          backgroundSize: "80px 80px",
+          maskImage: "radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%)",
+        }}
       />
 
-      <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-        {/* Badge */}
-        <div
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm mb-8 animate-fade-up"
-          style={{
-            background: "rgba(99,102,241,0.1)",
-            border: "1px solid rgba(99,102,241,0.3)",
-            color: "#a5b4fc",
-            animationDelay: "0.1s",
-          }}
-        >
-          <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-          Open to new opportunities
+      <motion.div
+        className="relative z-10 container flex flex-col justify-center"
+        style={{ flex: 1, paddingTop: "10vh", paddingBottom: "4vh", opacity }}
+      >
+        {/* Top label row */}
+        <div className="flex items-center gap-4 mb-10">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="section-label"
+          >
+            Product Manager · Data Analytics · Manufacturing
+          </motion.div>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: EASE }}
+            style={{ height: 1, background: "var(--border)", flex: 1, transformOrigin: "left" }}
+          />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="flex items-center gap-2 section-label"
+          >
+            <span className="inline-block w-2 h-2 rounded-full bg-green-500" style={{ animation: "pulse 2s infinite" }} />
+            Available
+          </motion.div>
         </div>
 
-        {/* Name */}
-        <h1
-          className="text-5xl md:text-7xl font-bold mb-4 animate-fade-up"
-          style={{ animationDelay: "0.2s", lineHeight: 1.1 }}
-        >
-          <span className="text-white">Maheepsai</span>{" "}
-          <span className="gradient-text">Jinka</span>
-        </h1>
-
-        {/* Typewriter */}
-        <div
-          className="text-xl md:text-2xl font-medium text-[#8888a8] mb-6 h-8 animate-fade-up"
-          style={{ animationDelay: "0.3s" }}
-        >
-          <span className="text-[#a5b4fc]">{displayed}</span>
-          <span className="animate-pulse text-[#6366f1]">|</span>
+        {/* Name — giant */}
+        <div>
+          <ClipReveal delay={0.15}>
+            <h1 className="display-xl" style={{ color: "var(--black)" }}>
+              Maheepsai
+            </h1>
+          </ClipReveal>
+          <ClipReveal delay={0.25}>
+            <h1
+              className="display-xl"
+              style={{
+                color: "transparent",
+                WebkitTextStroke: "2px var(--black)",
+                letterSpacing: "-0.04em",
+              }}
+            >
+              Jinka
+            </h1>
+          </ClipReveal>
         </div>
 
-        {/* Tagline */}
-        <p
-          className="text-lg text-[#8888a8] max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-up"
-          style={{ animationDelay: "0.4s" }}
-        >
-          Driving <span className="text-white font-semibold">$11M+ in cost savings</span> and launching{" "}
-          <span className="text-white font-semibold">200+ new products</span> at Intel. Bridging
-          data analytics, manufacturing engineering, and product strategy to deliver measurable impact.
-        </p>
+        {/* Divider */}
+        <motion.div
+          className="divider my-8"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1, delay: 0.5, ease: EASE }}
+          style={{ transformOrigin: "left" }}
+        />
 
-        {/* CTAs */}
-        <div
-          className="flex flex-wrap gap-4 justify-center animate-fade-up"
-          style={{ animationDelay: "0.5s" }}
-        >
-          <a href="#experience" className="btn-primary">
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-            View My Work
-          </a>
-          <a href="#contact" className="btn-secondary">
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            Get In Touch
-          </a>
-        </div>
+        {/* Bottom row */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div className="max-w-md">
+            <ClipReveal delay={0.4}>
+              <p className="body-lg" style={{ color: "var(--gray)" }}>
+                New Product Manager at Intel. Turning complex engineering
+                challenges into <strong style={{ color: "var(--black)", fontWeight: 600 }}>$11M+ savings</strong> and{" "}
+                <strong style={{ color: "var(--black)", fontWeight: 600 }}>200+ products</strong> launched.
+              </p>
+            </ClipReveal>
 
-        {/* Quick stats */}
-        <div
-          className="mt-16 grid grid-cols-3 gap-6 max-w-lg mx-auto animate-fade-up"
-          style={{ animationDelay: "0.6s" }}
-        >
-          {[
-            { value: "$11M+", label: "Cost Savings" },
-            { value: "200+", label: "NPI Launches" },
-            { value: "99%", label: "Yield Achieved" },
-          ].map((s) => (
-            <div key={s.label} className="text-center">
-              <div className="text-2xl font-bold gradient-text">{s.value}</div>
-              <div className="text-xs text-[#8888a8] mt-1">{s.label}</div>
-            </div>
-          ))}
+            <motion.div
+              className="flex flex-wrap gap-3 mt-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+            >
+              <a href="#experience" className="btn-dark">
+                View Work
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+              <a href="#contact" className="btn-outline">Get In Touch</a>
+            </motion.div>
+          </div>
+
+          {/* Quick facts */}
+          <motion.div
+            className="flex gap-10 md:gap-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+          >
+            {[
+              { value: "Intel", sub: "Current Employer" },
+              { value: "5+", sub: "Years of Impact" },
+              { value: "4 ↑", sub: "Companies Scaled" },
+            ].map((s) => (
+              <div key={s.sub}>
+                <div className="text-2xl font-bold tracking-tight" style={{ color: "var(--black)" }}>
+                  {s.value}
+                </div>
+                <div className="section-label mt-1">{s.sub}</div>
+              </div>
+            ))}
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[#8888a8] text-xs animate-fade-up">
-        <span>Scroll</span>
-        <div className="w-5 h-8 border border-[rgba(99,102,241,0.3)] rounded-full flex justify-center pt-1.5">
-          <div className="w-1 h-2 bg-[#6366f1] rounded-full animate-bounce" />
+      <motion.div
+        className="container flex items-center gap-3 pb-10"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.8 }}
+        style={{ position: "relative", zIndex: 10 }}
+      >
+        <div
+          style={{
+            width: 32,
+            height: 50,
+            border: "1.5px solid var(--border)",
+            borderRadius: 16,
+            display: "flex",
+            justifyContent: "center",
+            paddingTop: 8,
+          }}
+        >
+          <motion.div
+            style={{ width: 4, height: 8, background: "var(--black)", borderRadius: 2 }}
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          />
         </div>
-      </div>
+        <span className="section-label">Scroll to explore</span>
+      </motion.div>
     </section>
   );
 }

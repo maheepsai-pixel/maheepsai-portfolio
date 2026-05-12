@@ -1,6 +1,8 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
+import StatsBand from "@/components/StatsBand";
+import Marquee from "@/components/Marquee";
+import Story from "@/components/Story";
 import Experience from "@/components/Experience";
 import Skills from "@/components/Skills";
 import Education from "@/components/Education";
@@ -13,7 +15,9 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <About />
+        <StatsBand />
+        <Marquee />
+        <Story />
         <Experience />
         <Skills />
         <Education />
