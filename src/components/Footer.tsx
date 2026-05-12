@@ -17,8 +17,6 @@ export default function Footer() {
     ],
     Companies: [
       { label: "Intel", href: "https://www.intel.com" },
-      { label: "Moderna", href: "https://www.modernatx.com" },
-      { label: "John Deere", href: "https://www.deere.com" },
       { label: "DRDO", href: "https://www.drdo.gov.in" },
     ],
   };
@@ -42,7 +40,7 @@ export default function Footer() {
               MJ<span style={{ color: "rgba(255,255,255,0.2)" }}>.</span>
             </div>
             <p style={{ fontSize: 13, color: "rgba(255,255,255,0.35)", lineHeight: 1.6 }}>
-              Product Manager & Data Analytics Expert.
+              NPI Engineer & Data Analytics Expert.
               <br />
               Cincinnati, Ohio — Open to opportunities.
             </p>

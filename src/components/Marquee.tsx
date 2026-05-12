@@ -1,7 +1,8 @@
 const items = [
-  "Intel", "Moderna", "John Deere", "DRDO", "Python", "SQL", "Tableau",
-  "DOE", "ANOVA", "Amazon Redshift", "Product Manager", "NPI", "Agile",
+  "Intel", "DRDO", "Python", "SQL", "Tableau",
+  "DOE", "ANOVA", "Amazon Redshift", "NPI Engineer", "NPI", "Agile",
   "Data Analytics", "Manufacturing", "Power BI", "JMP", "ETL", "Scrum",
+  "Semiconductor", "Yield", "8D Analysis",
 ];
 
 export default function Marquee() {

@@ -31,15 +31,6 @@ const stats = [
     bg: "#F0EDE8",
     fg: "#0D0D0D",
     fgDim: "rgba(0,0,0,0.055)",
-    border: "1px solid rgba(0,0,0,0.07)",
-  },
-  {
-    value: "60%",
-    label: "Efficiency Gain",
-    sublabel: "John Deere automation",
-    bg: "#111110",
-    fg: "#FFFFFF",
-    fgDim: "rgba(255,255,255,0.05)",
     border: "none",
   },
 ];
@@ -53,7 +44,7 @@ export default function StatsBand() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "32% 17% 17% 17% 17%",
+          gridTemplateColumns: "40% 20% 20% 20%",
           minHeight: "85vh",
           width: "100%",
         }}
@@ -98,7 +89,7 @@ export default function StatsBand() {
             >
               Five years.
               <br />
-              Four companies.
+              NPI to HVM.
               <br />
               Real results.
             </h2>
@@ -117,8 +108,8 @@ export default function StatsBand() {
                 marginBottom: 36,
               }}
             >
-              From DRDO to Intel — every number here represents a real process
-              optimised, a product shipped, or a team led.
+              Every number here represents a real process optimised, a product
+              shipped, or a team led at semiconductor scale.
             </p>
             <a
               href="#story"

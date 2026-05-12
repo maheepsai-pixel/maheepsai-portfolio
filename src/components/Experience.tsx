@@ -8,10 +8,10 @@ const EASE = [0.33, 1, 0.68, 1] as const;
 const jobs = [
   {
     company: "Intel",
-    role: "New Product Manager",
+    role: "New Product Introduction Engineer",
     period: "",
     type: "Full-time",
-    accent: "#0071c5",
+    accent: "#c4644a",
     tagline: "Driving semiconductor NPI excellence at scale",
     impact: "$11M+ cost savings · 200+ products launched · 99% yield achieved",
     highlights: [
@@ -22,39 +22,6 @@ const jobs = [
       "Led daily Scrum standups; managed full PLM lifecycle using Agile and Waterfall methodologies",
     ],
     stack: ["Tableau", "SQL", "Python", "DOE", "8D Analysis", "Agile", "ETL", "PLM"],
-  },
-  {
-    company: "Moderna",
-    role: "Program Manager",
-    period: "Feb 2023 – Feb 2024",
-    type: "Full-time",
-    accent: "#c30045",
-    tagline: "Enabling the future of medicine through process scale-up",
-    impact: "$322M facility transition · Clinical Phase 3 to commercial production",
-    highlights: [
-      "Led transfer of upstream DNA processes enabling transition from Clinical Phase 3 to $322M commercial facility",
-      "Supported manufacturing investigations via STATISTICA, Amazon Redshift, JMP, and SQL data analysis",
-      "Implemented control charts for all critical process parameters using JMP, minimising deviations",
-      "Conducted DOE/ANOVA investigations for raw material approvals across cross-functional teams",
-      "Developed real-time turnaround dashboards on SPOTFIRE and Tableau for DNA processing analytics",
-    ],
-    stack: ["Amazon Redshift", "JMP", "STATISTICA", "SQL", "Tableau", "SPOTFIRE", "DOE", "ANOVA"],
-  },
-  {
-    company: "John Deere",
-    role: "Systems Engineer",
-    period: "May 2022 – Dec 2022",
-    type: "Full-time",
-    accent: "#367c2b",
-    tagline: "Automating engineering workflows with data intelligence",
-    impact: "60% engineering efficiency improvement",
-    highlights: [
-      "Built a test tool reading web API data into Pandas DataFrames for automated cleansing, analysis, and trend reporting",
-      "Eliminated manual prototype machine inspection, delivering 60% engineering workflow efficiency improvement",
-      "Built predictive maintenance platform using data cleaning, wrangling, and visualisation frameworks",
-      "Organised cross-functional Root Cause Analysis meetings and provided systems engineering technical support",
-    ],
-    stack: ["Python", "Pandas", "REST API", "Data Analysis", "Predictive Maintenance"],
   },
   {
     company: "DRDO",

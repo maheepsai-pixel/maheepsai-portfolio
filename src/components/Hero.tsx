@@ -71,7 +71,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="section-label"
           >
-            Product Manager · Data Analytics · Manufacturing
+            NPI Engineer · Data Analytics · Semiconductor
           </motion.div>
           <motion.div
             initial={{ scaleX: 0 }}
@@ -125,7 +125,7 @@ export default function Hero() {
           <div className="max-w-md">
             <ClipReveal delay={0.4}>
               <p className="body-lg" style={{ color: "var(--gray)" }}>
-                New Product Manager at Intel. Turning complex engineering
+                New Product Introduction Engineer at Intel. Turning complex engineering
                 challenges into <strong style={{ color: "var(--black)", fontWeight: 600 }}>$11M+ savings</strong> and{" "}
                 <strong style={{ color: "var(--black)", fontWeight: 600 }}>200+ products</strong> launched.
               </p>
@@ -157,7 +157,7 @@ export default function Hero() {
             {[
               { value: "Intel", sub: "Current Employer" },
               { value: "5+", sub: "Years of Impact" },
-              { value: "4 ↑", sub: "Companies Scaled" },
+              { value: "200+", sub: "Products Launched" },
             ].map((s) => (
               <div key={s.sub}>
                 <div className="text-2xl font-bold tracking-tight" style={{ color: "var(--black)" }}>

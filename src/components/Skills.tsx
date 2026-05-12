@@ -172,8 +172,8 @@ export default function Skills() {
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.7, delay: 0.35 }}
           >
-            Built across Intel, Moderna, John Deere, and DRDO — refined by
-            real-world stakes.
+            Built across Intel and DRDO — refined by real-world manufacturing
+            stakes.
           </motion.p>
         </div>
       </div>

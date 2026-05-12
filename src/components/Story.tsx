@@ -6,10 +6,8 @@ import { motion, useInView } from "framer-motion";
 const EASE = [0.33, 1, 0.68, 1] as const;
 
 const NAVY = "#0c0d18";
-const NAVY2 = "#10111f";
+const CREAM = "#F0ECE4";
 const TERRA = "#c4644a";
-const TERRA_DIM = "rgba(196,100,74,0.15)";
-const TERRA_BORDER = "rgba(196,100,74,0.3)";
 
 const metrics = [
   { value: "$11M+", label: "Cost savings via wafer scrap reduction" },
@@ -106,7 +104,7 @@ export default function Story() {
               transition={{ duration: 0.6, delay: 0.4 }}
             >
               <p style={{ fontSize: 13, fontWeight: 700, color: TERRA, letterSpacing: "0.01em", marginBottom: 8 }}>
-                New Product Manager
+                New Product Introduction Engineer
               </p>
               <p style={{ fontSize: 12, color: "rgba(255,255,255,0.3)", letterSpacing: "0.05em" }}>
                 2024 – Present · Full-time
@@ -127,15 +125,14 @@ export default function Story() {
           </motion.div>
         </motion.div>
 
-        {/* Panel 2 — narrative */}
+        {/* Panel 2 — narrative (cream) */}
         <motion.div
           style={{
-            background: NAVY2,
+            background: CREAM,
             padding: "clamp(56px,7vw,88px) clamp(32px,4vw,56px)",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            borderRight: "1px solid rgba(255,255,255,0.07)",
           }}
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -148,7 +145,7 @@ export default function Story() {
                 fontWeight: 600,
                 letterSpacing: "0.16em",
                 textTransform: "uppercase",
-                color: "rgba(255,255,255,0.28)",
+                color: "rgba(12,13,24,0.45)",
                 marginBottom: 28,
               }}
             >
@@ -158,20 +155,21 @@ export default function Story() {
             <p
               style={{
                 fontSize: "clamp(16px,1.7vw,19px)",
-                color: "rgba(255,255,255,0.78)",
+                color: "rgba(12,13,24,0.88)",
                 lineHeight: 1.8,
                 marginBottom: 24,
               }}
             >
-              At Intel, everything converged. As New Product Manager, I own the
-              end-to-end delivery of 200+ semiconductor products through the
-              complete NPI lifecycle — from initial planning and cross-functional
-              alignment through High Volume Production.
+              At Intel, everything converged. As New Product Introduction
+              Engineer, I own the end-to-end delivery of 200+ semiconductor
+              products through the complete NPI lifecycle — from initial
+              planning and cross-functional alignment through High Volume
+              Production.
             </p>
             <p
               style={{
                 fontSize: "clamp(14px,1.5vw,17px)",
-                color: "rgba(255,255,255,0.45)",
+                color: "rgba(12,13,24,0.6)",
                 lineHeight: 1.85,
                 marginBottom: 24,
               }}
@@ -184,7 +182,7 @@ export default function Story() {
             <p
               style={{
                 fontSize: "clamp(14px,1.5vw,17px)",
-                color: "rgba(255,255,255,0.45)",
+                color: "rgba(12,13,24,0.6)",
                 lineHeight: 1.85,
               }}
             >
@@ -207,7 +205,7 @@ export default function Story() {
                 fontWeight: 600,
                 letterSpacing: "0.13em",
                 textTransform: "uppercase",
-                color: "rgba(255,255,255,0.25)",
+                color: "rgba(12,13,24,0.4)",
                 marginBottom: 14,
               }}
             >
@@ -215,21 +213,21 @@ export default function Story() {
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
               {stack.map((s, i) => (
-                <span
-                  key={s}
-                  style={{ fontSize: 12, fontWeight: 500, color: "rgba(255,255,255,0.38)" }}
-                >
-                  {s}{i < stack.length - 1 ? <span style={{ margin: "0 6px", opacity: 0.3 }}>·</span> : null}
+                <span key={s} style={{ fontSize: 12, fontWeight: 500, color: "rgba(12,13,24,0.55)" }}>
+                  {s}
+                  {i < stack.length - 1 ? (
+                    <span style={{ margin: "0 6px", opacity: 0.4 }}>·</span>
+                  ) : null}
                 </span>
               ))}
             </div>
           </motion.div>
         </motion.div>
 
-        {/* Panel 3 — metrics */}
+        {/* Panel 3 — metrics (terracotta) */}
         <motion.div
           style={{
-            background: "#0e0a08",
+            background: TERRA,
             padding: "clamp(56px,7vw,88px) clamp(28px,3.5vw,48px)",
             display: "flex",
             flexDirection: "column",
@@ -245,19 +243,19 @@ export default function Story() {
               fontWeight: 600,
               letterSpacing: "0.16em",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.28)",
+              color: "rgba(255,255,255,0.55)",
             }}
           >
             Key Results
           </p>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
-            {metrics.map((m, i) => (
+            {metrics.map((m) => (
               <div
                 key={m.value}
                 style={{
                   padding: "28px 0",
-                  borderTop: "1px solid rgba(255,255,255,0.07)",
+                  borderTop: "1px solid rgba(255,255,255,0.18)",
                 }}
               >
                 <div
@@ -266,7 +264,7 @@ export default function Story() {
                     fontWeight: 800,
                     letterSpacing: "-0.04em",
                     lineHeight: 1,
-                    color: i === 0 ? TERRA : "#FFFFFF",
+                    color: "#FFFFFF",
                     marginBottom: 8,
                   }}
                 >
@@ -275,7 +273,7 @@ export default function Story() {
                 <p
                   style={{
                     fontSize: 12,
-                    color: "rgba(255,255,255,0.35)",
+                    color: "rgba(255,255,255,0.75)",
                     lineHeight: 1.55,
                     letterSpacing: "0.01em",
                   }}
@@ -293,10 +291,10 @@ export default function Story() {
               alignItems: "center",
               gap: 8,
               fontSize: 12,
-              fontWeight: 600,
-              color: TERRA,
+              fontWeight: 700,
+              color: "#FFFFFF",
               textDecoration: "none",
-              borderBottom: `1px solid ${TERRA_BORDER}`,
+              borderBottom: "1px solid rgba(255,255,255,0.4)",
               paddingBottom: 4,
               alignSelf: "flex-start",
             }}

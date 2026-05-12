@@ -13,17 +13,17 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://maheepsaijinka.dev
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "Maheepsai Jinka | Product Manager & Data Analytics Expert",
+    default: "Maheepsai Jinka | NPI Engineer & Data Analytics Expert",
     template: "%s | Maheepsai Jinka",
   },
   description:
-    "Maheepsai Jinka — New Product Manager at Intel driving $11M+ savings, 200+ NPI launches, and 99% yield. Expert in Python, SQL, Tableau, Agile, DOE, and data-driven manufacturing. Former Moderna & John Deere engineer.",
+    "Maheepsai Jinka — New Product Introduction Engineer at Intel driving $11M+ savings, 200+ NPI launches, and 99% yield. Expert in Python, SQL, Tableau, Agile, DOE, and data-driven semiconductor manufacturing.",
   keywords: [
-    "Maheepsai Jinka", "Maheep Jinka", "Product Manager", "New Product Introduction",
-    "NPI", "Intel Product Manager", "Moderna Program Manager", "John Deere Systems Engineer",
+    "Maheepsai Jinka", "Maheep Jinka", "New Product Introduction Engineer",
+    "NPI Engineer", "Intel NPI Engineer", "Semiconductor",
     "Data Analytics", "Python SQL Tableau", "Mechanical Engineering", "University of Cincinnati",
     "Manufacturing Engineering", "DOE ANOVA", "Amazon Redshift", "Power BI", "Agile Scrum",
-    "Semiconductor", "Yield Improvement", "ETL", "KPI Dashboard",
+    "Yield Improvement", "ETL", "KPI Dashboard", "8D Analysis", "PLM",
   ],
   authors: [{ name: "Maheepsai Jinka", url: BASE_URL }],
   creator: "Maheepsai Jinka",
@@ -31,16 +31,16 @@ export const metadata: Metadata = {
     type: "website",
     url: BASE_URL,
     siteName: "Maheepsai Jinka Portfolio",
-    title: "Maheepsai Jinka | Product Manager & Data Analytics Expert",
+    title: "Maheepsai Jinka | NPI Engineer & Data Analytics Expert",
     description:
-      "Product Manager at Intel with $11M+ cost savings, 200+ NPI launches. Expertise in data analytics, manufacturing engineering, Python, SQL, Tableau.",
+      "New Product Introduction Engineer at Intel with $11M+ cost savings, 200+ NPI launches. Expertise in data analytics, semiconductor manufacturing, Python, SQL, Tableau.",
     images: [{ url: `${BASE_URL}/og-image.png`, width: 1200, height: 630, alt: "Maheepsai Jinka Portfolio" }],
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Maheepsai Jinka | Product Manager & Data Analytics Expert",
-    description: "Product Manager at Intel with $11M+ cost savings and 200+ NPI launches.",
+    title: "Maheepsai Jinka | NPI Engineer & Data Analytics Expert",
+    description: "NPI Engineer at Intel with $11M+ cost savings and 200+ NPI launches.",
     images: [`${BASE_URL}/og-image.png`],
   },
   robots: {
@@ -62,10 +62,10 @@ const structuredData = {
       email: "maheepsaij@gmail.com",
       telephone: "+1-513-954-3525",
       sameAs: ["https://www.linkedin.com/in/maheep-j-1b3406185/"],
-      jobTitle: "New Product Manager",
+      jobTitle: "New Product Introduction Engineer",
       worksFor: { "@type": "Organization", name: "Intel Corporation", url: "https://www.intel.com" },
       alumniOf: { "@type": "CollegeOrUniversity", name: "University of Cincinnati", url: "https://www.uc.edu" },
-      description: "Experienced Product Manager at Intel with expertise in NPI, data analytics, Python, SQL, Tableau, manufacturing engineering, and Agile. Achieved $11M+ in cost savings and managed 200+ new product introductions.",
+      description: "New Product Introduction Engineer at Intel with expertise in NPI, data analytics, Python, SQL, Tableau, semiconductor manufacturing, and Agile. Achieved $11M+ in cost savings and managed 200+ new product introductions.",
       knowsAbout: ["Product Management","NPI","Data Analytics","Python","SQL","Tableau","Power BI","Amazon Redshift","DOE","ANOVA","Agile","Scrum","Manufacturing Engineering","Yield Improvement","ETL","SPC"],
     },
     {

@@ -12,7 +12,17 @@
       "Bash(ls /opt/homebrew/opt/ | grep node 2>/dev/null; ls /usr/local/lib/ 2>/dev/null | grep node)",
       "Bash(brew install *)",
       "Bash(export PATH=\"/opt/homebrew/bin:$PATH\")",
-      "Bash(npx --version)"
+      "Bash(npx --version)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(gh auth *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(gh repo *)",
+      "mcp__Claude_Preview__preview_start",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "WebFetch(domain:www.flyhyer.com)",
+      "Bash(git push *)"
     ]
   }
 }
