@@ -337,3 +337,25 @@ body {
   .section { padding: 80px 0; }
   .section-sm { padding: 56px 0; }
 }
+
+/* Stats panel grid */
+.stats-panel-grid {
+  display: grid;
+  grid-template-columns: 32% 17% 17% 17% 17%;
+  min-height: 85vh;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .stats-panel-grid {
+    grid-template-columns: 1fr 1fr;
+    min-height: auto;
+  }
+  .stats-panel-text {
+    grid-column: 1 / -1;
+    min-height: 56vh;
+  }
+  .stats-panel-cell {
+    min-height: 44vw;
+  }
+}
