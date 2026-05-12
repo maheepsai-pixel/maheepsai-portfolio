@@ -41,7 +41,7 @@ export default function Footer() {
             <p style={{ fontSize: 13, color: "rgba(255,255,255,0.35)", lineHeight: 1.6 }}>
               NPI Engineer & Data Analytics Expert.
               <br />
-              Cincinnati, Ohio — Open to opportunities.
+              Dallas, Texas — Open to opportunities.
             </p>
           </div>
 

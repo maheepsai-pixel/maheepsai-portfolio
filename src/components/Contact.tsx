@@ -56,7 +56,7 @@ export default function Contact() {
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.7, delay: 0.35 }}
           >
-            Open to product management, data analytics, and engineering leadership opportunities.
+            Open to product management, process engineer, and quality engineer opportunities.
           </motion.p>
         </div>
 
@@ -92,7 +92,7 @@ export default function Contact() {
                 },
                 {
                   label: "Location",
-                  value: "Cincinnati, Ohio, USA",
+                  value: "Dallas, Texas, USA",
                   href: undefined,
                   icon: (
                     <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>

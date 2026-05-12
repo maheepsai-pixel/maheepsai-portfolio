@@ -64,7 +64,7 @@ const structuredData = {
       jobTitle: "New Product Introduction Engineer",
       worksFor: { "@type": "Organization", name: "Intel Corporation", url: "https://www.intel.com" },
       alumniOf: { "@type": "CollegeOrUniversity", name: "University of Cincinnati", url: "https://www.uc.edu" },
-      description: "New Product Introduction Engineer at Intel with expertise in NPI, data analytics, Python, SQL, Tableau, semiconductor manufacturing, and Agile. Achieved $11M+ in cost savings and managed 200+ new product introductions.",
+      description: "New Product Introduction Engineer at Intel based in Dallas, Texas with expertise in NPI, data analytics, Python, SQL, Tableau, semiconductor manufacturing, and Agile. Achieved $11M+ in cost savings and managed 200+ new product introductions.",
       knowsAbout: ["Product Management","NPI","Data Analytics","Python","SQL","Tableau","Power BI","Amazon Redshift","DOE","ANOVA","Agile","Scrum","Manufacturing Engineering","Yield Improvement","ETL","SPC"],
     },
     {

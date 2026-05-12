@@ -120,7 +120,7 @@ export default function Story() {
           >
             <div style={{ height: 1, background: "rgba(255,255,255,0.07)", marginBottom: 24 }} />
             <p style={{ fontSize: 12, color: "rgba(255,255,255,0.25)", lineHeight: 1.6 }}>
-              Semiconductor manufacturing · NPI to HVM · Arizona, USA
+              Semiconductor manufacturing · NPI to HVM · Dallas, Texas
             </p>
           </motion.div>
         </motion.div>
