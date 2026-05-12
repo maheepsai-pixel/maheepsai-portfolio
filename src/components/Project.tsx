@@ -9,36 +9,112 @@ const TERRA = "#c4644a";
 const CREAM = "#F0ECE4";
 const NAVY = "#1a1208";
 
-const nodes = [
-  { label: "Sensors", sub: "Floor IoT", x: 5, y: 50 },
-  { label: "Ingestion", sub: "REST API", x: 25, y: 50 },
-  { label: "ETL", sub: "Python · Pandas", x: 47, y: 50 },
-  { label: "Database", sub: "PostgreSQL", x: 70, y: 50 },
-  { label: "Dashboard", sub: "Tableau · Web", x: 92, y: 50 },
-];
-
-const stack = [
-  "Python", "Pandas", "PostgreSQL", "REST API", "Docker",
-  "Tableau", "SPC", "8D Analysis", "CI/CD",
+const stages = [
+  {
+    num: "01",
+    label: "Ingest",
+    title: "REST API",
+    sub: "Sensor telemetry · backpressure · retries",
+    icon: (
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round">
+        <path d="M16 8v16" />
+        <path d="M9 14c2 0 3-1 3-3s-1-3-3-3" opacity={0.7} />
+        <path d="M23 14c-2 0-3-1-3-3s1-3 3-3" opacity={0.7} />
+        <path d="M6 18c4 0 6-2 6-6" opacity={0.4} />
+        <path d="M26 18c-4 0-6-2-6-6" opacity={0.4} />
+        <circle cx="16" cy="26" r="1.5" fill="currentColor" />
+      </svg>
+    ),
+  },
+  {
+    num: "02",
+    label: "Transform",
+    title: "Python ETL",
+    sub: "Pandas pipelines · type checks · validation",
+    icon: (
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+        <rect x="6" y="6" width="8" height="8" rx="1" />
+        <rect x="18" y="6" width="8" height="8" rx="1" />
+        <rect x="6" y="18" width="8" height="8" rx="1" />
+        <rect x="18" y="18" width="8" height="8" rx="1" />
+        <path d="M14 10h4" />
+        <path d="M22 14v4" />
+        <path d="M14 22h4" opacity={0.5} />
+        <path d="M10 14v4" opacity={0.5} />
+      </svg>
+    ),
+  },
+  {
+    num: "03",
+    label: "Compute",
+    title: "SPC Engine",
+    sub: "Control charts · Cp/Cpk · Western Electric",
+    icon: (
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 22l5-7 5 4 6-9 4 6 4-3" />
+        <line x1="4" y1="6" x2="28" y2="6" opacity={0.3} strokeDasharray="2 2" />
+        <line x1="4" y1="26" x2="28" y2="26" opacity={0.3} strokeDasharray="2 2" />
+        <circle cx="9" cy="15" r="1.5" fill="currentColor" />
+        <circle cx="14" cy="19" r="1.5" fill="currentColor" />
+        <circle cx="20" cy="10" r="1.5" fill={TERRA} stroke={TERRA} />
+        <circle cx="24" cy="16" r="1.5" fill="currentColor" />
+        <circle cx="28" cy="13" r="1.5" fill="currentColor" />
+      </svg>
+    ),
+    highlight: true,
+  },
+  {
+    num: "04",
+    label: "Store",
+    title: "PostgreSQL",
+    sub: "Time-series tables · analytical queries",
+    icon: (
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round">
+        <ellipse cx="16" cy="8" rx="10" ry="3" />
+        <path d="M6 8v8c0 1.7 4.5 3 10 3s10-1.3 10-3V8" />
+        <path d="M6 16v8c0 1.7 4.5 3 10 3s10-1.3 10-3v-8" />
+      </svg>
+    ),
+  },
+  {
+    num: "05",
+    label: "Surface",
+    title: "Live Dashboard",
+    sub: "Yield · scrap drilldowns · alerts",
+    icon: (
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+        <rect x="4" y="6" width="24" height="18" rx="1.5" />
+        <path d="M4 11h24" />
+        <rect x="8" y="14" width="3" height="7" fill="currentColor" opacity={0.7} />
+        <rect x="13" y="16" width="3" height="5" fill="currentColor" opacity={0.7} />
+        <rect x="18" y="13" width="3" height="8" fill="currentColor" opacity={0.7} />
+        <rect x="23" y="15" width="3" height="6" fill="currentColor" opacity={0.7} />
+        <circle cx="6.5" cy="8.5" r="0.7" fill="currentColor" />
+        <circle cx="9" cy="8.5" r="0.7" fill="currentColor" />
+      </svg>
+    ),
+  },
 ];
 
 const features = [
   {
-    num: "01",
-    title: "Real-time data ingestion",
-    body: "REST endpoints accept sensor telemetry; producers stream events into the ETL pipeline with backpressure and retries.",
+    label: "Realtime",
+    title: "Event-driven ingestion",
+    body: "REST producers stream sensor telemetry with retry and backpressure.",
   },
   {
-    num: "02",
-    title: "Statistical Process Control",
-    body: "Control charts compute Cp, Cpk, and Western Electric rules on the fly, flagging deviations the moment they appear.",
+    label: "Statistics",
+    title: "On-the-fly SPC",
+    body: "Cp, Cpk, and Western Electric rules computed as events land.",
   },
   {
-    num: "03",
-    title: "Yield & scrap analytics",
-    body: "DOE/ANOVA-style queries surface root causes across lots, materials, and machines — the same patterns that saved $11M+ at Intel.",
+    label: "Insight",
+    title: "Yield & scrap drilldowns",
+    body: "Slice metrics by lot, material, machine, and shift in seconds.",
   },
 ];
+
+const stack = ["Python", "Pandas", "PostgreSQL", "REST API", "Docker", "Tableau", "SPC", "8D Analysis"];
 
 export default function Project() {
   const ref = useRef<HTMLDivElement>(null);
@@ -93,172 +169,193 @@ export default function Project() {
         </div>
       </div>
 
-      {/* Visualization — dark navy */}
-      <div style={{ background: NAVY, position: "relative", overflow: "hidden" }}>
-        <div className="container" style={{ paddingTop: "clamp(56px,7vw,96px)", paddingBottom: "clamp(56px,7vw,96px)" }}>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "minmax(0,1fr) minmax(0,1.3fr)",
-              gap: 56,
-              alignItems: "start",
-            }}
-            className="project-grid"
+      {/* About — dark navy strip */}
+      <div style={{ background: NAVY, paddingTop: "clamp(48px,5vw,72px)", paddingBottom: "clamp(48px,5vw,72px)" }}>
+        <div className="container">
+          <motion.div
+            style={{ maxWidth: 820 }}
+            initial={{ opacity: 0, y: 24 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
           >
-            {/* Left — about */}
-            <motion.div
-              initial={{ opacity: 0, x: -24 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
+            <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.32)", marginBottom: 20 }}>
+              About the build
+            </p>
+            <p
+              style={{
+                fontSize: "clamp(20px,1.9vw,26px)",
+                fontWeight: 600,
+                color: "#FFFFFF",
+                lineHeight: 1.45,
+                letterSpacing: "-0.015em",
+                marginBottom: 20,
+              }}
             >
-              <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: 24 }}>
-                About the build
-              </p>
-              <h3
-                style={{
-                  fontSize: "clamp(20px,2vw,26px)",
-                  fontWeight: 700,
-                  letterSpacing: "-0.02em",
-                  lineHeight: 1.3,
-                  color: "#FFFFFF",
-                  marginBottom: 20,
-                }}
-              >
-                A scaled-down MES mirroring the patterns I run at Intel.
-              </h3>
-              <p style={{ fontSize: 15, color: "rgba(255,255,255,0.55)", lineHeight: 1.8, marginBottom: 28 }}>
-                Production data flows from simulated sensors through a Python/Pandas
-                ETL pipeline into PostgreSQL, then surfaces as live SPC charts,
-                yield breakdowns, and scrap-cause drilldowns in a Tableau-style
-                dashboard.
-              </p>
-              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.4)", lineHeight: 1.8, marginBottom: 32 }}>
-                Built to demonstrate the same end-to-end thinking — sensors to
-                dashboards — that drove $11M+ in savings on real wafer lines.
-              </p>
+              An open-source Manufacturing Execution System for tracking
+              production lines, computing SPC metrics, and surfacing yield and
+              scrap analytics in real time.
+            </p>
+            <p style={{ fontSize: 15, color: "rgba(255,255,255,0.55)", lineHeight: 1.8 }}>
+              Production data lands via REST, flows through a Python/Pandas
+              pipeline, persists in PostgreSQL, and surfaces in a live dashboard.
+              Containerised with Docker and instrumented end to end.
+            </p>
+          </motion.div>
+        </div>
+      </div>
 
-              <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.13em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: 12 }}>
+      {/* Architecture — dark navy */}
+      <div style={{ background: "#120c06", paddingTop: "clamp(56px,6vw,88px)", paddingBottom: "clamp(56px,6vw,88px)" }}>
+        <div className="container">
+          <div className="flex items-center justify-between flex-wrap gap-4 mb-12">
+            <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)" }}>
+              Data Flow Architecture
+            </p>
+            <p style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", fontFamily: "ui-monospace, SFMono-Regular, monospace" }}>
+              sensor → api → etl → db → ui
+            </p>
+          </div>
+
+          {/* Stages grid */}
+          <div className="arch-grid">
+            {stages.map((s, i) => (
+              <motion.div
+                key={s.num}
+                className="arch-cell"
+                initial={{ opacity: 0, y: 24 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, ease: EASE, delay: 0.25 + i * 0.1 }}
+              >
+                <div className="flex items-center justify-between mb-6">
+                  <span style={{ fontSize: 10, fontWeight: 700, color: s.highlight ? TERRA : "rgba(255,255,255,0.35)", letterSpacing: "0.1em" }}>
+                    {s.num}
+                  </span>
+                  <span style={{ fontSize: 9, fontWeight: 600, letterSpacing: "0.16em", textTransform: "uppercase", color: s.highlight ? TERRA : "rgba(255,255,255,0.35)" }}>
+                    {s.label}
+                  </span>
+                </div>
+
+                <div
+                  style={{
+                    width: 56,
+                    height: 56,
+                    color: s.highlight ? TERRA : "#FFFFFF",
+                    opacity: s.highlight ? 1 : 0.92,
+                    marginBottom: 20,
+                  }}
+                >
+                  {s.icon}
+                </div>
+
+                <div style={{ fontSize: 16, fontWeight: 700, color: "#FFFFFF", letterSpacing: "-0.01em", marginBottom: 6 }}>
+                  {s.title}
+                </div>
+                <p style={{ fontSize: 12, color: "rgba(255,255,255,0.45)", lineHeight: 1.6 }}>
+                  {s.sub}
+                </p>
+
+                {/* Connector arrow */}
+                {i < stages.length - 1 && (
+                  <motion.div
+                    className="arch-arrow"
+                    initial={{ scaleX: 0 }}
+                    animate={inView ? { scaleX: 1 } : {}}
+                    transition={{ duration: 0.5, ease: EASE, delay: 0.35 + i * 0.1 }}
+                  >
+                    <svg width="100%" height="10" viewBox="0 0 100 10" preserveAspectRatio="none">
+                      <line x1="0" y1="5" x2="92" y2="5" stroke={TERRA} strokeWidth="1" strokeDasharray="3 3" opacity="0.6" />
+                      <polyline points="88,2 94,5 88,8" stroke={TERRA} strokeWidth="1" fill="none" opacity="0.8" />
+                    </svg>
+                  </motion.div>
+                )}
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Features row */}
+          <div className="feat-grid" style={{ marginTop: 64 }}>
+            {features.map((f, i) => (
+              <motion.div
+                key={f.label}
+                className="feat-cell"
+                initial={{ opacity: 0, y: 16 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.8 + i * 0.1 }}
+              >
+                <p style={{ fontSize: 10, fontWeight: 600, color: TERRA, letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 14 }}>
+                  {f.label}
+                </p>
+                <div style={{ fontSize: 16, fontWeight: 700, color: "#FFFFFF", marginBottom: 10, letterSpacing: "-0.01em" }}>
+                  {f.title}
+                </div>
+                <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", lineHeight: 1.7 }}>
+                  {f.body}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Stack list */}
+          <motion.div
+            style={{ marginTop: 64, paddingTop: 32, borderTop: "1px solid rgba(255,255,255,0.08)" }}
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 1.1 }}
+          >
+            <div className="flex items-baseline gap-8 flex-wrap">
+              <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)" }}>
                 Stack
               </p>
-              <div style={{ display: "flex", flexWrap: "wrap", columnGap: 16, rowGap: 8 }}>
-                {stack.map((s, i) => (
-                  <span key={s} style={{ fontSize: 12, fontWeight: 500, color: "rgba(255,255,255,0.55)" }}>
+              <div style={{ display: "flex", flexWrap: "wrap", columnGap: 18, rowGap: 8 }}>
+                {stack.map((s) => (
+                  <span key={s} style={{ fontSize: 13, fontWeight: 500, color: "rgba(255,255,255,0.6)" }}>
                     {s}
-                    {i < stack.length - 1 ? <span style={{ marginLeft: 16, opacity: 0.3 }}>·</span> : null}
                   </span>
                 ))}
               </div>
-            </motion.div>
-
-            {/* Right — architecture viz */}
-            <motion.div
-              initial={{ opacity: 0, x: 24 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, ease: EASE, delay: 0.3 }}
-            >
-              <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: 24 }}>
-                Data Flow Architecture
-              </p>
-
-              <div
-                style={{
-                  position: "relative",
-                  background: "rgba(255,255,255,0.02)",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                  padding: "48px 32px",
-                  minHeight: 280,
-                }}
-              >
-                <svg viewBox="0 0 100 100" preserveAspectRatio="none" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}>
-                  {nodes.slice(0, -1).map((n, i) => {
-                    const next = nodes[i + 1];
-                    return (
-                      <motion.line
-                        key={i}
-                        x1={n.x + 4}
-                        y1={n.y}
-                        x2={next.x - 4}
-                        y2={next.y}
-                        stroke={TERRA}
-                        strokeWidth={0.3}
-                        strokeDasharray="1 1"
-                        initial={{ pathLength: 0, opacity: 0 }}
-                        animate={inView ? { pathLength: 1, opacity: 0.6 } : {}}
-                        transition={{ duration: 0.8, delay: 0.5 + i * 0.15, ease: EASE }}
-                      />
-                    );
-                  })}
-                </svg>
-
-                {nodes.map((n, i) => (
-                  <motion.div
-                    key={n.label}
-                    style={{
-                      position: "absolute",
-                      left: `${n.x}%`,
-                      top: `${n.y}%`,
-                      transform: "translate(-50%, -50%)",
-                      textAlign: "center",
-                    }}
-                    initial={{ opacity: 0, scale: 0.6 }}
-                    animate={inView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ duration: 0.5, delay: 0.4 + i * 0.12, ease: EASE }}
-                  >
-                    <div
-                      style={{
-                        width: 14,
-                        height: 14,
-                        background: i === 2 ? TERRA : "rgba(255,255,255,0.85)",
-                        margin: "0 auto 12px",
-                      }}
-                    />
-                    <div style={{ fontSize: 12, fontWeight: 700, color: "#FFFFFF", marginBottom: 2 }}>
-                      {n.label}
-                    </div>
-                    <div style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", letterSpacing: "0.03em" }}>
-                      {n.sub}
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* Feature blocks */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 0, marginTop: 32 }}>
-                {features.map((f, i) => (
-                  <motion.div
-                    key={f.num}
-                    style={{
-                      padding: "20px 18px",
-                      borderLeft: i === 0 ? "1px solid rgba(255,255,255,0.1)" : "1px solid rgba(255,255,255,0.1)",
-                      borderRight: i === features.length - 1 ? "1px solid rgba(255,255,255,0.1)" : "none",
-                      borderTop: "1px solid rgba(255,255,255,0.1)",
-                      borderBottom: "1px solid rgba(255,255,255,0.1)",
-                    }}
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={inView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6, delay: 0.7 + i * 0.1 }}
-                  >
-                    <div style={{ fontSize: 10, fontWeight: 700, color: TERRA, letterSpacing: "0.1em", marginBottom: 10 }}>
-                      {f.num}
-                    </div>
-                    <div style={{ fontSize: 13, fontWeight: 700, color: "#FFFFFF", marginBottom: 8, lineHeight: 1.3 }}>
-                      {f.title}
-                    </div>
-                    <p style={{ fontSize: 12, color: "rgba(255,255,255,0.45)", lineHeight: 1.65 }}>
-                      {f.body}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </div>
       </div>
 
       <style>{`
+        .arch-grid {
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          gap: 0;
+        }
+        .arch-cell {
+          position: relative;
+          padding: 32px 28px;
+          border: 1px solid rgba(255,255,255,0.08);
+          margin-left: -1px;
+          margin-top: -1px;
+        }
+        .arch-arrow {
+          position: absolute;
+          right: -12px;
+          top: 60px;
+          width: 24px;
+          height: 10px;
+          z-index: 2;
+          transform-origin: left;
+        }
+        .feat-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 32px;
+        }
+        .feat-cell {
+          padding: 28px 0 0 24px;
+          border-left: 1px solid rgba(255,255,255,0.1);
+        }
         @media (max-width: 900px) {
-          #project .project-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
-          #project [style*="grid-template-columns: 1fr 1fr 1fr"] { grid-template-columns: 1fr !important; }
+          .arch-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          .arch-arrow { display: none !important; }
+          .feat-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
+        }
+        @media (max-width: 560px) {
+          .arch-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </section>
