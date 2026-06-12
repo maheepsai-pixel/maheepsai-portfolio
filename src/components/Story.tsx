@@ -156,41 +156,41 @@ export default function Story() {
               style={{
                 fontSize: "clamp(16px,1.7vw,19px)",
                 color: "rgba(12,13,24,0.88)",
-                lineHeight: 1.8,
-                marginBottom: 24,
+                lineHeight: 1.7,
+                marginBottom: 28,
               }}
             >
-              At Intel, everything converged. As New Product Introduction
-              Engineer, I own the end-to-end delivery of 200+ semiconductor
-              products through the complete NPI lifecycle — from initial
-              planning and cross-functional alignment through High Volume
-              Production.
+              End-to-end owner of semiconductor products through the complete
+              NPI lifecycle — planning to High Volume Production.
             </p>
-            <p
-              style={{
-                fontSize: "clamp(14px,1.5vw,17px)",
-                color: "rgba(12,13,24,0.6)",
-                lineHeight: 1.85,
-                marginBottom: 24,
-              }}
-            >
-              The role demands a rare combination: engineering precision for
-              process analysis, data fluency for SQL pipelines and Tableau
-              dashboards, and leadership for daily Scrum standups and complex
-              vendor negotiations — all in the same week.
-            </p>
-            <p
-              style={{
-                fontSize: "clamp(14px,1.5vw,17px)",
-                color: "rgba(12,13,24,0.6)",
-                lineHeight: 1.85,
-              }}
-            >
-              The headline result: $11M+ in estimated savings from wafer scrap
-              reduction alone — achieved through systematic 8D root cause
-              analysis, DOE experiments, and vendor management programs that
-              eliminated failure modes at semiconductor scale.
-            </p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
+              {[
+                { k: "$11M+ saved", v: "Wafer scrap reduction via 8D root cause analysis & DOE" },
+                { k: "200+ products", v: "Delivered from NPI through High Volume Production" },
+                { k: "99% yield", v: "Sustained from ramp to high volume" },
+                { k: "Data-driven", v: "SQL pipelines & Tableau dashboards for factory KPIs" },
+                { k: "Leadership", v: "Daily Scrum, cross-functional alignment, vendor management" },
+              ].map((b) => (
+                <div
+                  key={b.k}
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "130px 1fr",
+                    gap: 16,
+                    padding: "14px 0",
+                    borderTop: "1px solid rgba(12,13,24,0.1)",
+                    alignItems: "baseline",
+                  }}
+                >
+                  <span style={{ fontSize: 13, fontWeight: 800, color: "#c4644a", letterSpacing: "-0.01em" }}>
+                    {b.k}
+                  </span>
+                  <span style={{ fontSize: 13.5, color: "rgba(12,13,24,0.65)", lineHeight: 1.55 }}>
+                    {b.v}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Tools */}
@@ -285,7 +285,7 @@ export default function Story() {
           </div>
 
           <motion.a
-            href="#project"
+            href="#project-qp"
             style={{
               display: "inline-flex",
               alignItems: "center",

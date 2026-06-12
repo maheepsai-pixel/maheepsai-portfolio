@@ -422,9 +422,10 @@ export default function ProjectQP() {
                 In the Press
               </p>
               <p style={{ fontSize: "clamp(15px,1.4vw,17px)", color: "rgba(255,255,255,0.6)", lineHeight: 1.75 }}>
-                Grit Daily on why modern Manufacturing Execution Systems are
-                the missing backbone of American manufacturing&rsquo;s
-                comeback — the exact problem this build tackles.
+                Featured in Grit Daily — on why modern Manufacturing
+                Execution Systems are the missing backbone of American
+                manufacturing&rsquo;s comeback, and the engineering behind
+                this build.
               </p>
             </div>
 
@@ -434,25 +435,44 @@ export default function ProjectQP() {
               rel="noopener noreferrer"
               className="press-card"
             >
-              {/* Hero — article masthead */}
-              <div className="press-card-hero">
-                <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: "0.24em", textTransform: "uppercase", color: TERRA, marginBottom: 14 }}>
-                  Grit Daily
-                </p>
-                <p
+              {/* Hero — article masthead + author photo */}
+              <div className="press-card-hero" style={{ display: "flex", alignItems: "center", gap: 20 }}>
+                <div style={{ flex: 1 }}>
+                  <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: "0.24em", textTransform: "uppercase", color: TERRA, marginBottom: 14 }}>
+                    Grit Daily
+                  </p>
+                  <p
+                    style={{
+                      fontSize: "clamp(16px,1.5vw,20px)",
+                      fontWeight: 700,
+                      fontStyle: "italic",
+                      color: "#FFFFFF",
+                      lineHeight: 1.35,
+                      letterSpacing: "-0.01em",
+                    }}
+                  >
+                    The Missing Operating System Behind America&rsquo;s
+                    Manufacturing
+                  </p>
+                  <div style={{ width: 36, height: 2, background: TERRA, marginTop: 16 }} />
+                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/projects/grit-feature.jpg"
+                  alt="Maheepsai Jinka featured in Grit Daily"
+                  onError={(e) => { e.currentTarget.style.display = "none"; }}
                   style={{
-                    fontSize: "clamp(17px,1.6vw,21px)",
-                    fontWeight: 700,
-                    fontStyle: "italic",
-                    color: "#FFFFFF",
-                    lineHeight: 1.35,
-                    letterSpacing: "-0.01em",
+                    width: 92,
+                    height: 110,
+                    objectFit: "cover",
+                    objectPosition: "50% 12%",
+                    borderRadius: 10,
+                    border: "1px solid rgba(255,255,255,0.18)",
+                    flexShrink: 0,
+                    boxShadow: "0 8px 24px rgba(0,0,0,0.4)",
                   }}
-                >
-                  The Missing Operating System Behind America&rsquo;s
-                  Manufacturing
-                </p>
-                <div style={{ width: 36, height: 2, background: TERRA, marginTop: 16 }} />
+                  loading="lazy"
+                />
               </div>
               {/* Meta strip — like iMessage */}
               <div

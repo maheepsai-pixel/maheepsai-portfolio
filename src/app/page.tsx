@@ -19,8 +19,8 @@ export default function Home() {
         <StatsBand />
         <Marquee />
         <Story />
-        <Project />
         <ProjectQP />
+        <Project />
         <Skills />
         <Education />
         <Contact />
