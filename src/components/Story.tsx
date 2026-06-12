@@ -285,7 +285,7 @@ export default function Story() {
           </div>
 
           <motion.a
-            href="#experience"
+            href="#project"
             style={{
               display: "inline-flex",
               alignItems: "center",

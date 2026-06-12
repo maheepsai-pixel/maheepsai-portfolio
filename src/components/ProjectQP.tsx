@@ -108,6 +108,81 @@ const features = [
 
 const stack = ["React", "TypeScript", "Supabase", "PostgreSQL", "Tailwind CSS", "shadcn/ui", "Playwright", "Vite"];
 
+/* Real product screenshot — SPC process control */
+function QPMockup({ inView }: { inView: boolean }) {
+  return (
+    <motion.div
+      className="glossy"
+      initial={{ opacity: 0, y: 32 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.9, ease: EASE, delay: 0.35 }}
+      style={{
+        border: "1px solid rgba(12,13,24,0.14)",
+        background: "#FFFFFF",
+        boxShadow: "0 32px 80px rgba(12,13,24,0.18), 0 8px 28px rgba(196,100,74,0.12)",
+      }}
+    >
+      {/* Caption bar */}
+      <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "10px 14px", borderBottom: "1px solid rgba(12,13,24,0.08)" }}>
+        <span style={{ width: 8, height: 8, borderRadius: "50%", background: "rgba(12,13,24,0.12)" }} />
+        <span style={{ width: 8, height: 8, borderRadius: "50%", background: "rgba(12,13,24,0.12)" }} />
+        <span style={{ width: 8, height: 8, borderRadius: "50%", background: "rgba(12,13,24,0.12)" }} />
+        <span style={{ marginLeft: 12, fontSize: 10, color: "rgba(12,13,24,0.35)", fontFamily: "ui-monospace, SFMono-Regular, monospace" }}>
+          quality-pilot — process control
+        </span>
+        <span style={{ marginLeft: "auto", fontSize: 9, fontWeight: 700, letterSpacing: "0.12em", color: TERRA }}>
+          SPC · I-MR
+        </span>
+      </div>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/projects/mes-spc.png"
+        alt="Quality Pilot process control — SPC I-MR control charts with Cpk, control limits, and out-of-spec tracking by operator"
+        style={{ display: "block", width: "100%", height: "auto" }}
+        loading="lazy"
+      />
+    </motion.div>
+  );
+}
+
+/* Real product screenshot — efficiency analytics */
+function QPEfficiency({ inView }: { inView: boolean }) {
+  return (
+    <motion.div
+      className="glossy"
+      initial={{ opacity: 0, y: 32 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.9, ease: EASE, delay: 0.5 }}
+      style={{
+        border: "1px solid rgba(255,255,255,0.16)",
+        background: "#FFFFFF",
+        boxShadow: "0 40px 100px rgba(0,0,0,0.5), 0 12px 40px rgba(196,100,74,0.15)",
+        maxWidth: 980,
+        margin: "0 auto",
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "10px 14px", borderBottom: "1px solid rgba(12,13,24,0.08)", background: "#FFFFFF" }}>
+        <span style={{ width: 8, height: 8, borderRadius: "50%", background: "rgba(12,13,24,0.12)" }} />
+        <span style={{ width: 8, height: 8, borderRadius: "50%", background: "rgba(12,13,24,0.12)" }} />
+        <span style={{ width: 8, height: 8, borderRadius: "50%", background: "rgba(12,13,24,0.12)" }} />
+        <span style={{ marginLeft: 12, fontSize: 10, color: "rgba(12,13,24,0.35)", fontFamily: "ui-monospace, SFMono-Regular, monospace" }}>
+          quality-pilot — efficiency analytics
+        </span>
+        <span style={{ marginLeft: "auto", fontSize: 9, fontWeight: 700, letterSpacing: "0.12em", color: TERRA }}>
+          LIVE · 5 MIN
+        </span>
+      </div>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/projects/mes-efficiency.png"
+        alt="Quality Pilot efficiency analytics — daily efficiency trend, units completed, labor hours per unit, and performance targets"
+        style={{ display: "block", width: "100%", height: "auto" }}
+        loading="lazy"
+      />
+    </motion.div>
+  );
+}
+
 export default function ProjectQP() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
@@ -182,9 +257,8 @@ export default function ProjectQP() {
 
       {/* About — cream strip */}
       <div style={{ background: CREAM, paddingTop: "clamp(48px,5vw,72px)", paddingBottom: "clamp(48px,5vw,72px)" }}>
-        <div className="container">
+        <div className="container qp-about-grid">
           <motion.div
-            style={{ maxWidth: 820 }}
             initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
@@ -214,6 +288,8 @@ export default function ProjectQP() {
               Supabase with row-level security.
             </p>
           </motion.div>
+
+          <QPMockup inView={inView} />
         </div>
       </div>
 
@@ -285,6 +361,11 @@ export default function ProjectQP() {
             ))}
           </div>
 
+          {/* Efficiency analytics screenshot */}
+          <div style={{ marginTop: 64 }}>
+            <QPEfficiency inView={inView} />
+          </div>
+
           {/* Features row */}
           <div className="feat-grid" style={{ marginTop: 64 }}>
             {features.map((f, i) => (
@@ -328,8 +409,98 @@ export default function ProjectQP() {
               </div>
             </div>
           </motion.div>
+
+          {/* Press mention — iMessage-style rich link */}
+          <motion.div
+            className="qp-press"
+            initial={{ opacity: 0, y: 16 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease: EASE, delay: 1.2 }}
+          >
+            <div style={{ maxWidth: 420 }}>
+              <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: TERRA, marginBottom: 16 }}>
+                In the Press
+              </p>
+              <p style={{ fontSize: "clamp(15px,1.4vw,17px)", color: "rgba(255,255,255,0.6)", lineHeight: 1.75 }}>
+                Grit Daily on why modern Manufacturing Execution Systems are
+                the missing backbone of American manufacturing&rsquo;s
+                comeback — the exact problem this build tackles.
+              </p>
+            </div>
+
+            <a
+              href="https://gritdaily.com/missing-operating-system-behind-america-manufacturing/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="press-card"
+            >
+              {/* Hero — article masthead */}
+              <div className="press-card-hero">
+                <p style={{ fontSize: 9, fontWeight: 800, letterSpacing: "0.24em", textTransform: "uppercase", color: TERRA, marginBottom: 14 }}>
+                  Grit Daily
+                </p>
+                <p
+                  style={{
+                    fontSize: "clamp(17px,1.6vw,21px)",
+                    fontWeight: 700,
+                    fontStyle: "italic",
+                    color: "#FFFFFF",
+                    lineHeight: 1.35,
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  The Missing Operating System Behind America&rsquo;s
+                  Manufacturing
+                </p>
+                <div style={{ width: 36, height: 2, background: TERRA, marginTop: 16 }} />
+              </div>
+              {/* Meta strip — like iMessage */}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: 12,
+                  padding: "12px 16px",
+                  background: "#f5f5f7",
+                }}
+              >
+                <div>
+                  <div style={{ fontSize: 12, fontWeight: 600, color: "#1d1d1f", marginBottom: 2 }}>
+                    The Missing Operating System Behind America&rsquo;s Manufacturing
+                  </div>
+                  <div style={{ fontSize: 11, color: "#86868b" }}>gritdaily.com</div>
+                </div>
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#86868b" strokeWidth={2} style={{ flexShrink: 0 }}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </div>
+            </a>
+          </motion.div>
         </div>
       </div>
+
+      <style>{`
+        .qp-about-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: clamp(32px,4vw,64px);
+          align-items: center;
+        }
+        .qp-press {
+          margin-top: 64px;
+          padding-top: 48px;
+          border-top: 1px solid rgba(255,255,255,0.08);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: clamp(32px,5vw,72px);
+        }
+        @media (max-width: 900px) {
+          .qp-about-grid { grid-template-columns: 1fr !important; }
+          .qp-press { flex-direction: column; align-items: flex-start; gap: 28px; }
+        }
+      `}</style>
     </section>
   );
 }

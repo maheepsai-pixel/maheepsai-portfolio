@@ -4,218 +4,87 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
 const EASE = [0.33, 1, 0.68, 1] as const;
+const TERRA = "#c4644a";
 
 const stats = [
-  {
-    value: "$11M+",
-    label: "Cost Savings",
-    sublabel: "Wafer scrap reduction at Intel",
-    bg: "#FFFFFF",
-    fg: "#0D0D0D",
-    fgDim: "rgba(0,0,0,0.055)",
-    border: "1px solid rgba(0,0,0,0.07)",
-  },
-  {
-    value: "200+",
-    label: "Products Launched",
-    sublabel: "End-to-end NPI deliveries",
-    bg: "#1A1917",
-    fg: "#FFFFFF",
-    fgDim: "rgba(255,255,255,0.05)",
-    border: "1px solid rgba(255,255,255,0.07)",
-  },
-  {
-    value: "99%",
-    label: "Yield Achieved",
-    sublabel: "NPI to High Volume Production",
-    bg: "#F0EDE8",
-    fg: "#0D0D0D",
-    fgDim: "rgba(0,0,0,0.055)",
-    border: "none",
-  },
+  { value: "$11M+", label: "Cost Savings", detail: "Wafer scrap reduction" },
+  { value: "200+", label: "Products Launched", detail: "NPI to HVM pipeline" },
+  { value: "99%", label: "Yield Achieved", detail: "High volume production" },
+  { value: "5+", label: "Years of Impact", detail: "Semiconductor manufacturing" },
 ];
 
 export default function StatsBand() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-40px" });
 
   return (
     <section ref={ref} id="stats-band" aria-label="Impact statistics">
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "40% 20% 20% 20%",
-          minHeight: "85vh",
-          width: "100%",
-        }}
-      >
-
-        {/* Left — editorial text panel */}
-        <div
-          style={{
-            background: "#111110",
-            padding: "clamp(40px,6vw,72px) clamp(32px,4vw,56px)",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            borderRight: "1px solid rgba(255,255,255,0.07)",
-          }}
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.85, ease: EASE }}
-          >
-            <p
-              style={{
-                fontSize: 11,
-                fontWeight: 600,
-                letterSpacing: "0.15em",
-                textTransform: "uppercase",
-                color: "rgba(255,255,255,0.28)",
-                marginBottom: 28,
-              }}
-            >
-              Impact by the Numbers
-            </p>
-            <h2
-              style={{
-                fontSize: "clamp(34px,4vw,64px)",
-                fontWeight: 800,
-                letterSpacing: "-0.04em",
-                lineHeight: 0.92,
-                color: "#FFFFFF",
-              }}
-            >
-              Five years.
-              <br />
-              NPI to HVM.
-              <br />
-              Real results.
-            </h2>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.7, delay: 0.5 }}
-          >
-            <p
-              style={{
-                fontSize: 14,
-                color: "rgba(255,255,255,0.38)",
-                lineHeight: 1.75,
-                marginBottom: 36,
-              }}
-            >
-              Every number here represents a real process optimised, a product
-              shipped, or a team led at semiconductor scale.
-            </p>
-            <a
-              href="#story"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                fontSize: 13,
-                fontWeight: 600,
-                color: "#FFFFFF",
-                textDecoration: "none",
-                borderBottom: "1px solid rgba(255,255,255,0.22)",
-                paddingBottom: 4,
-              }}
-            >
-              View the story
-              <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
-          </motion.div>
-        </div>
-
-        {/* 4 stat panels */}
+      <div className="stats-strip">
         {stats.map((s, i) => (
           <motion.div
             key={s.value}
-            style={{
-              background: s.bg,
-              padding: "clamp(28px,3.5vw,44px) clamp(20px,2.5vw,36px)",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              position: "relative",
-              overflow: "hidden",
-              borderRight: s.border,
-            }}
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.7, ease: EASE, delay: 0.2 + i * 0.1 }}
+            className="stats-strip-cell"
+            initial={{ opacity: 0, y: 16 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease: EASE, delay: 0.1 + i * 0.08 }}
           >
-            {/* Giant watermark number cropped by overflow:hidden */}
-            <div
-              aria-hidden
-              style={{
-                position: "absolute",
-                bottom: -16,
-                left: -8,
-                fontSize: "clamp(96px,13vw,180px)",
-                fontWeight: 800,
-                letterSpacing: "-0.06em",
-                lineHeight: 0.82,
-                color: s.fgDim,
-                pointerEvents: "none",
-                userSelect: "none",
-              }}
-            >
-              {s.value}
-            </div>
-
-            {/* Top — sublabel */}
-            <p
-              style={{
-                fontSize: 10,
-                fontWeight: 600,
-                letterSpacing: "0.13em",
-                textTransform: "uppercase",
-                color: s.fg,
-                opacity: 0.38,
-                position: "relative",
-                zIndex: 1,
-              }}
-            >
-              {s.sublabel}
-            </p>
-
-            {/* Bottom — primary stat */}
-            <div style={{ position: "relative", zIndex: 1 }}>
-              <div
-                style={{
-                  fontSize: "clamp(36px,4.5vw,68px)",
-                  fontWeight: 800,
-                  letterSpacing: "-0.04em",
-                  lineHeight: 1,
-                  color: s.fg,
-                  marginBottom: 6,
-                }}
-              >
-                {s.value}
-              </div>
-              <div
-                style={{
-                  fontSize: 11,
-                  fontWeight: 600,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: s.fg,
-                  opacity: 0.45,
-                }}
-              >
-                {s.label}
-              </div>
-            </div>
+            <div className="stats-strip-value">{s.value}</div>
+            <div className="stats-strip-label">{s.label}</div>
+            <div className="stats-strip-detail">{s.detail}</div>
           </motion.div>
         ))}
       </div>
+
+      <style>{`
+        .stats-strip {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          background: #111110;
+          border-top: 1px solid rgba(255,255,255,0.06);
+          border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .stats-strip-cell {
+          padding: clamp(32px,4vw,56px) clamp(20px,2.5vw,40px);
+          border-right: 1px solid rgba(255,255,255,0.06);
+          position: relative;
+        }
+        .stats-strip-cell:last-child {
+          border-right: none;
+        }
+        .stats-strip-value {
+          font-size: clamp(32px, 4vw, 56px);
+          font-weight: 800;
+          letter-spacing: -0.04em;
+          line-height: 1;
+          color: #FFFFFF;
+          margin-bottom: 12px;
+        }
+        .stats-strip-label {
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: ${TERRA};
+          margin-bottom: 6px;
+        }
+        .stats-strip-detail {
+          font-size: 12px;
+          color: rgba(255,255,255,0.3);
+          line-height: 1.5;
+        }
+        @media (max-width: 768px) {
+          .stats-strip {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          .stats-strip-cell:nth-child(2) {
+            border-right: none;
+          }
+          .stats-strip-cell:nth-child(1),
+          .stats-strip-cell:nth-child(2) {
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+          }
+        }
+      `}</style>
     </section>
   );
 }

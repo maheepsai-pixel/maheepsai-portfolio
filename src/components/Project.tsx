@@ -8,13 +8,30 @@ const EASE = [0.33, 1, 0.68, 1] as const;
 const TERRA = "#c4644a";
 const CREAM = "#F0ECE4";
 const NAVY = "#1a1208";
+const GREEN = "#4ade80";
 
 const stages = [
   {
     num: "01",
+    label: "Edge",
+    title: "Cart Firmware",
+    sub: "GPS · speed · heading · battery volts/amps",
+    icon: (
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="13" cy="26" r="2" />
+        <circle cx="24" cy="26" r="2" />
+        <path d="M4 6h3l3.5 14h14l3-10H9" />
+        <path d="M16 2v3" opacity={0.5} />
+        <path d="M21 3l-1.5 2.6" opacity={0.5} />
+        <path d="M11 3l1.5 2.6" opacity={0.5} />
+      </svg>
+    ),
+  },
+  {
+    num: "02",
     label: "Ingest",
     title: "REST API",
-    sub: "Sensor telemetry · backpressure · retries",
+    sub: "Express endpoints · validation · normalisation",
     icon: (
       <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round">
         <path d="M16 8v16" />
@@ -27,38 +44,15 @@ const stages = [
     ),
   },
   {
-    num: "02",
-    label: "Transform",
-    title: "Python ETL",
-    sub: "Pandas pipelines · type checks · validation",
-    icon: (
-      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
-        <rect x="6" y="6" width="8" height="8" rx="1" />
-        <rect x="18" y="6" width="8" height="8" rx="1" />
-        <rect x="6" y="18" width="8" height="8" rx="1" />
-        <rect x="18" y="18" width="8" height="8" rx="1" />
-        <path d="M14 10h4" />
-        <path d="M22 14v4" />
-        <path d="M14 22h4" opacity={0.5} />
-        <path d="M10 14v4" opacity={0.5} />
-      </svg>
-    ),
-  },
-  {
     num: "03",
-    label: "Compute",
-    title: "SPC Engine",
-    sub: "Control charts · Cp/Cpk · Western Electric",
+    label: "Stream",
+    title: "Socket.IO",
+    sub: "Live websocket push to every client",
     icon: (
       <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 22l5-7 5 4 6-9 4 6 4-3" />
-        <line x1="4" y1="6" x2="28" y2="6" opacity={0.3} strokeDasharray="2 2" />
-        <line x1="4" y1="26" x2="28" y2="26" opacity={0.3} strokeDasharray="2 2" />
-        <circle cx="9" cy="15" r="1.5" fill="currentColor" />
-        <circle cx="14" cy="19" r="1.5" fill="currentColor" />
-        <circle cx="20" cy="10" r="1.5" fill={TERRA} stroke={TERRA} />
-        <circle cx="24" cy="16" r="1.5" fill="currentColor" />
-        <circle cx="28" cy="13" r="1.5" fill="currentColor" />
+        <path d="M6 20c0-5.5 4.5-10 10-10s10 4.5 10 10" opacity={0.4} />
+        <path d="M10 22c0-3.3 2.7-6 6-6s6 2.7 6 6" opacity={0.7} />
+        <circle cx="16" cy="24" r="2" fill="currentColor" />
       </svg>
     ),
     highlight: true,
@@ -67,7 +61,7 @@ const stages = [
     num: "04",
     label: "Store",
     title: "PostgreSQL",
-    sub: "Time-series tables · analytical queries",
+    sub: "Partitioned telemetry · O(1) fleet-state upserts",
     icon: (
       <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round">
         <ellipse cx="16" cy="8" rx="10" ry="3" />
@@ -79,16 +73,15 @@ const stages = [
   {
     num: "05",
     label: "Surface",
-    title: "Live Dashboard",
-    sub: "Yield · scrap drilldowns · alerts",
+    title: "Fleet Dashboard",
+    sub: "Live map · battery gauges · alert feed",
     icon: (
       <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
         <rect x="4" y="6" width="24" height="18" rx="1.5" />
         <path d="M4 11h24" />
-        <rect x="8" y="14" width="3" height="7" fill="currentColor" opacity={0.7} />
-        <rect x="13" y="16" width="3" height="5" fill="currentColor" opacity={0.7} />
-        <rect x="18" y="13" width="3" height="8" fill="currentColor" opacity={0.7} />
-        <rect x="23" y="15" width="3" height="6" fill="currentColor" opacity={0.7} />
+        <circle cx="12" cy="17" r="2.5" opacity={0.7} />
+        <circle cx="20" cy="19" r="1.5" opacity={0.7} />
+        <circle cx="23" cy="15" r="1.5" opacity={0.7} />
         <circle cx="6.5" cy="8.5" r="0.7" fill="currentColor" />
         <circle cx="9" cy="8.5" r="0.7" fill="currentColor" />
       </svg>
@@ -99,29 +92,67 @@ const stages = [
 const features = [
   {
     label: "Realtime",
-    title: "Event-driven ingestion",
-    body: "REST producers stream sensor telemetry with retry and backpressure.",
+    title: "Sub-second fleet state",
+    body: "Telemetry lands via REST and is pushed to every dashboard over websockets instantly.",
   },
   {
-    label: "Statistics",
-    title: "On-the-fly SPC",
-    body: "Cp, Cpk, and Western Electric rules computed as events land.",
+    label: "Scale",
+    title: "Partitioned time-series",
+    body: "Daily PostgreSQL partitions with auto-rotation keep telemetry queries fast forever.",
   },
   {
-    label: "Insight",
-    title: "Yield & scrap drilldowns",
-    body: "Slice metrics by lot, material, machine, and shift in seconds.",
+    label: "Operations",
+    title: "Battery & alert intelligence",
+    body: "Voltage-based battery gauges, low-battery alerting, and a live activity log.",
   },
 ];
 
-const stack = ["Python", "Pandas", "PostgreSQL", "REST API", "Docker", "Tableau", "SPC", "8D Analysis"];
+const stack = ["Node.js", "Express", "Socket.IO", "PostgreSQL", "React", "Supabase", "Docker", "Fly.io"];
+
+/* Real product screenshot — live fleet ops console */
+function FleetMockup({ inView }: { inView: boolean }) {
+  return (
+    <motion.div
+      className="glossy"
+      initial={{ opacity: 0, y: 32 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.9, ease: EASE, delay: 0.35 }}
+      style={{
+        border: "1px solid rgba(255,255,255,0.16)",
+        background: "#0e0a05",
+        boxShadow: "0 40px 100px rgba(0,0,0,0.55), 0 12px 40px rgba(196,100,74,0.18)",
+      }}
+    >
+      {/* Caption bar */}
+      <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "10px 14px", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+        <span style={{ width: 8, height: 8, borderRadius: "50%", background: "rgba(255,255,255,0.15)" }} />
+        <span style={{ width: 8, height: 8, borderRadius: "50%", background: "rgba(255,255,255,0.15)" }} />
+        <span style={{ width: 8, height: 8, borderRadius: "50%", background: "rgba(255,255,255,0.15)" }} />
+        <span style={{ marginLeft: 12, fontSize: 10, color: "rgba(255,255,255,0.3)", fontFamily: "ui-monospace, SFMono-Regular, monospace" }}>
+          smartcart — fleet ops console
+        </span>
+        <span style={{ marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 6, fontSize: 9, fontWeight: 700, letterSpacing: "0.12em", color: GREEN }}>
+          <span style={{ width: 6, height: 6, borderRadius: "50%", background: GREEN, display: "inline-block" }} />
+          LIVE
+        </span>
+      </div>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/projects/smartcart-live.png"
+        alt="SmartCart live fleet operations console — real-time GPS map with cart telemetry, voltage, heading, and satellite lock"
+        style={{ display: "block", width: "100%", height: "auto" }}
+        loading="lazy"
+      />
+    </motion.div>
+  );
+}
 
 export default function Project() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="project" ref={ref} aria-label="Featured Project">
+    <section id="project" ref={ref} aria-label="SmartCart Project">
       {/* Header — cream */}
       <div style={{ background: CREAM }}>
         <div className="container" style={{ paddingTop: "clamp(64px,8vw,120px)", paddingBottom: 56 }}>
@@ -134,7 +165,7 @@ export default function Project() {
                   animate={inView ? { y: 0 } : {}}
                   transition={{ duration: 0.6, ease: EASE }}
                 >
-                  Featured Build · Open Source
+                  Featured Build · IoT Fleet Telemetry
                 </motion.p>
               </div>
               <div style={{ overflow: "hidden" }}>
@@ -145,14 +176,14 @@ export default function Project() {
                   animate={inView ? { y: 0 } : {}}
                   transition={{ duration: 0.75, ease: EASE, delay: 0.1 }}
                 >
-                  Manufacturing
+                  Smart<em style={{ fontStyle: "italic" }}>Cart</em>
                   <br />
-                  Execution <em style={{ fontStyle: "italic" }}>System</em>
+                  Fleet Manager
                 </motion.h2>
               </div>
             </div>
             <motion.a
-              href="https://github.com/maheepsai-pixel/MES"
+              href="https://github.com/maheepsai-pixel/SmartCart"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-dark"
@@ -169,42 +200,46 @@ export default function Project() {
         </div>
       </div>
 
-      {/* About — dark navy strip */}
+      {/* About — espresso strip */}
       <div style={{ background: NAVY, paddingTop: "clamp(48px,5vw,72px)", paddingBottom: "clamp(48px,5vw,72px)" }}>
         <div className="container">
-          <motion.div
-            style={{ maxWidth: 820 }}
-            initial={{ opacity: 0, y: 24 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
-          >
-            <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.32)", marginBottom: 20 }}>
-              About the build
-            </p>
-            <p
-              style={{
-                fontSize: "clamp(20px,1.9vw,26px)",
-                fontWeight: 600,
-                color: "#FFFFFF",
-                lineHeight: 1.45,
-                letterSpacing: "-0.015em",
-                marginBottom: 20,
-              }}
+          <div className="about-grid">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
             >
-              An open-source Manufacturing Execution System for tracking
-              production lines, computing SPC metrics, and surfacing yield and
-              scrap analytics in real time.
-            </p>
-            <p style={{ fontSize: 15, color: "rgba(255,255,255,0.55)", lineHeight: 1.8 }}>
-              Production data lands via REST, flows through a Python/Pandas
-              pipeline, persists in PostgreSQL, and surfaces in a live dashboard.
-              Containerised with Docker and instrumented end to end.
-            </p>
-          </motion.div>
+              <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.32)", marginBottom: 20 }}>
+                About the build
+              </p>
+              <p
+                style={{
+                  fontSize: "clamp(20px,1.9vw,26px)",
+                  fontWeight: 600,
+                  color: "#FFFFFF",
+                  lineHeight: 1.45,
+                  letterSpacing: "-0.015em",
+                  marginBottom: 20,
+                }}
+              >
+                A real-time fleet management platform for GPS-equipped smart
+                shopping carts — telemetry, live tracking, and battery
+                intelligence at fleet scale.
+              </p>
+              <p style={{ fontSize: 15, color: "rgba(255,255,255,0.55)", lineHeight: 1.8 }}>
+                Cart firmware streams GPS and power telemetry into an Express
+                API. Socket.IO pushes live state to every dashboard, while
+                partitioned PostgreSQL tables keep months of time-series data
+                queryable in milliseconds. Deployed on Fly.io with Docker.
+              </p>
+            </motion.div>
+
+            <FleetMockup inView={inView} />
+          </div>
         </div>
       </div>
 
-      {/* Architecture — dark navy */}
+      {/* Architecture — darkest */}
       <div style={{ background: "#120c06", paddingTop: "clamp(56px,6vw,88px)", paddingBottom: "clamp(56px,6vw,88px)" }}>
         <div className="container">
           <div className="flex items-center justify-between flex-wrap gap-4 mb-12">
@@ -212,7 +247,7 @@ export default function Project() {
               Data Flow Architecture
             </p>
             <p style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", fontFamily: "ui-monospace, SFMono-Regular, monospace" }}>
-              sensor → api → etl → db → ui
+              cart → api → websocket → db → dashboard
             </p>
           </div>
 
@@ -319,6 +354,16 @@ export default function Project() {
       </div>
 
       <style>{`
+        .about-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: clamp(32px,4vw,64px);
+          align-items: center;
+        }
+        .mock-body {
+          display: grid;
+          grid-template-columns: 45% 55%;
+        }
         .arch-grid {
           display: grid;
           grid-template-columns: repeat(5, 1fr);
@@ -350,6 +395,8 @@ export default function Project() {
           border-left: 1px solid rgba(255,255,255,0.1);
         }
         @media (max-width: 900px) {
+          .about-grid { grid-template-columns: 1fr !important; }
+          .mock-body { grid-template-columns: 1fr !important; }
           .arch-grid { grid-template-columns: repeat(2, 1fr) !important; }
           .arch-arrow { display: none !important; }
           .feat-grid { grid-template-columns: 1fr !important; gap: 24px !important; }

@@ -334,7 +334,58 @@ body {
   .section-sm { padding: 56px 0; }
 }
 
-/* Stats panel grid */
+/* Glossy screenshot frame */
+.glossy {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  transform: translateZ(0);
+  transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.glossy::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.05) 22%,
+    transparent 48%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+.glossy:hover {
+  transform: translateY(-6px) scale(1.005);
+}
+
+/* iMessage-style rich link card */
+.press-card {
+  display: block;
+  width: 100%;
+  max-width: 440px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #1d1d1f;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  text-decoration: none;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.press-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.55);
+}
+.press-card-hero {
+  position: relative;
+  padding: 28px 24px 24px;
+  background:
+    linear-gradient(115deg, rgba(255,255,255,0.07) 0%, transparent 40%),
+    linear-gradient(160deg, #2a1812 0%, #160d08 55%, #0e0a05 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
 .stats-panel-grid {
   display: grid;
   grid-template-columns: 32% 17% 17% 17% 17%;

@@ -4,7 +4,7 @@ export default function Footer() {
   const links = {
     Navigation: [
       { label: "Story", href: "#story" },
-      { label: "Experience", href: "#experience" },
+      { label: "Projects", href: "#project" },
       { label: "Skills", href: "#skills" },
       { label: "Education", href: "#education" },
       { label: "Contact", href: "#contact" },
